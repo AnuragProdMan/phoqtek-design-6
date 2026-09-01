@@ -86,39 +86,42 @@
   const fallback = document.getElementById('glFallback');
   let world = null;
 
-  const filmVisual = document.getElementById('filmVisual');
-  const filmGnss = document.getElementById('filmGnss');
-  const seqCanvas = document.getElementById('seqDrone');
-  let droneSeq = null;
-  const eyes = ['01 · Constellation', '02 · The platform', '03 · Visual lock', '04 · GNSS lock'];
+  const seqDrone = document.getElementById('seqDrone');
+  const seqVisual = document.getElementById('seqVisual');
+  const seqGnss = document.getElementById('seqGnss');
+  const hud = document.querySelector('#stage .hud');
+  const actsWrap = document.querySelector('#stage .acts');
+  const cue = document.querySelector('#stage .scroll-cue');
+  const seqs = { drone: null, visual: null, gnss: null };
+  const eyes = ['01 · The platform', '02 · Constellation', '03 · Visual lock', '04 · GNSS lock'];
   const statuses = [
-    'GNSS <b class="warn">LOCK → DENIED</b>',
     'UAV <b>IN FLIGHT</b>',
+    'GNSS <b class="warn">LOCK → DENIED</b>',
     'VNS <b>TERRAIN LOCK</b>',
     'GNSS <b class="warn">DENIED</b>'
   ];
 
   function copyIndex(p) {
-    if (p < 0.08) return 0;
-    if (p < 0.16) return 1;
-    if (p < 0.24) return 2;
+    if (p < 0.09) return 0;
+    if (p < 0.18) return 1;
+    if (p < 0.27) return 2;
     if (p < 0.36) return 3;
-    if (p < 0.48) return 4;
-    if (p < 0.60) return 5;
-    if (p < 0.72) return 6;
-    if (p < 0.86) return 7;
-    return 8;
+    if (p < 0.45) return 4;
+    if (p < 0.54) return 5;
+    if (p < 0.63) return 6;
+    if (p < 0.72) return 7;
+    return 7;
   }
   function chapterIndex(p) {
-    if (p < 0.24) return 0;
-    if (p < 0.48) return 1;
-    if (p < 0.72) return 2;
+    if (p < 0.18) return 0;
+    if (p < 0.36) return 1;
+    if (p < 0.54) return 2;
     return 3;
   }
-  function droneLocal(p) {
-    if (p < 0.24) return 0;
-    if (p > 0.48) return 1;
-    return (p - 0.24) / 0.24;
+  function localIn(p, a, b) {
+    if (p <= a) return 0;
+    if (p >= b) return 1;
+    return (p - a) / (b - a);
   }
 
   if (track && canvas) {
@@ -138,13 +141,11 @@
       });
     }
   }
-  if (track && seqCanvas) {
+  if (track) {
     import('./sequence.js').then((m) => {
-      droneSeq = m.createSequence(seqCanvas, {
-        count: 36,
-        path: (n) => `assets/drone/frame-${n}.jpg`,
-        reduced: reduce
-      });
+      if (seqDrone) seqs.drone = m.createSequence(seqDrone, { count: 36, path: (n) => `assets/drone/frame-${n}.jpg`, reduced: reduce });
+      if (seqVisual) seqs.visual = m.createSequence(seqVisual, { count: 36, path: (n) => `assets/visual/frame-${n}.jpg`, reduced: reduce });
+      if (seqGnss) seqs.gnss = m.createSequence(seqGnss, { count: 36, path: (n) => `assets/gnss/frame-${n}.jpg`, reduced: reduce });
     }).catch((err) => console.error('sequence', err));
   }
 
@@ -152,17 +153,24 @@
     if (world) world.setProgress(p);
     if (bar) bar.style.width = (p * 100).toFixed(1) + '%';
     if (fadeEl && world) fadeEl.style.opacity = String(world.fade());
+    const problem = document.getElementById('problem');
+    const overlay = problem ? problem.getBoundingClientRect().top < window.innerHeight * 0.92 : p >= 0.86;
     const ci = copyIndex(p);
-    copies.forEach((el, i) => el.classList.toggle('is-on', i === ci));
+    copies.forEach((el, i) => el.classList.toggle('is-on', i === ci && !overlay));
     const ch = chapterIndex(p);
     acts.forEach((el, i) => el.classList.toggle('on', i === ch));
     if (eye) eye.textContent = eyes[ch];
     if (status) status.innerHTML = statuses[ch];
-    if (canvas) canvas.classList.toggle('is-off', ch !== 0);
-    if (seqCanvas) seqCanvas.classList.toggle('is-on', ch === 1);
-    if (droneSeq) droneSeq.setProgress(droneLocal(p));
-    if (filmVisual) filmVisual.classList.toggle('is-on', ch === 2);
-    if (filmGnss) filmGnss.classList.toggle('is-on', ch === 3);
+    if (hud) hud.classList.toggle('is-away', overlay);
+    if (actsWrap) actsWrap.classList.toggle('is-away', overlay);
+    if (cue) cue.classList.toggle('is-away', overlay);
+    if (canvas) canvas.classList.toggle('is-off', ch !== 1);
+    if (seqDrone) seqDrone.classList.toggle('is-on', ch === 0);
+    if (seqVisual) seqVisual.classList.toggle('is-on', ch === 2);
+    if (seqGnss) seqGnss.classList.toggle('is-on', ch === 3);
+    if (seqs.drone) seqs.drone.setProgress(localIn(p, 0, 0.18));
+    if (seqs.visual) seqs.visual.setProgress(localIn(p, 0.36, 0.54));
+    if (seqs.gnss) seqs.gnss.setProgress(localIn(p, 0.54, 0.72));
   }
 
   function frame() {

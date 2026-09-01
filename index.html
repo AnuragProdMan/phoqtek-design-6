@@ -51,14 +51,10 @@
 
 <div class="track" id="track">
   <div class="stage-gl" id="stage">
-    <canvas id="gl" aria-hidden="true"></canvas>
-    <canvas id="seqDrone" class="act-seq" aria-hidden="true"></canvas>
-    <div class="act-film" id="filmVisual">
-      <video autoplay muted loop playsinline poster="assets/cinematic/visual-lock.jpg?v=3"><source src="assets/cinematic/visual-lock.mp4?v=3" type="video/mp4"></video>
-    </div>
-    <div class="act-film" id="filmGnss">
-      <video autoplay muted loop playsinline poster="assets/cinematic/gnss-canyon.jpg?v=3"><source src="assets/cinematic/gnss-canyon.mp4?v=3" type="video/mp4"></video>
-    </div>
+    <canvas id="gl" class="is-off" aria-hidden="true"></canvas>
+    <canvas id="seqDrone" class="act-seq is-on" aria-hidden="true"></canvas>
+    <canvas id="seqVisual" class="act-seq" aria-hidden="true"></canvas>
+    <canvas id="seqGnss" class="act-seq" aria-hidden="true"></canvas>
     <div class="gl-fallback" id="glFallback" hidden>
       <video autoplay muted loop playsinline poster="assets/cinematic/constellation.jpg"><source src="assets/cinematic/constellation.mp4" type="video/mp4"></video>
     </div>
@@ -66,59 +62,59 @@
     <div class="veil grain"></div>
     <div class="hud">
       <div class="hud-top">
-        <div class="eyebrow"><i></i><span class="mono" id="hudEye" style="font-size:10.5px; letter-spacing:.26em; text-transform:uppercase; color:var(--silver);">01 · Constellation</span></div>
-        <div class="status" id="hudStatus">GNSS <b class="warn">LOCK → DENIED</b></div>
+        <div class="eyebrow"><i></i><span class="mono" id="hudEye" style="font-size:10.5px; letter-spacing:.26em; text-transform:uppercase; color:var(--silver);">01 · The platform</span></div>
+        <div class="status" id="hudStatus">UAV <b>IN FLIGHT</b></div>
       </div>
       <div class="copy-stack">
-        <div class="copy-card is-on" data-copy="0"><h2 class="anton metal-text">Obstructed.<br>Spoofed.<br>Denied.</h2><p class="lead">Redefining navigation beyond GPS.</p></div>
-        <div class="copy-card" data-copy="1"><h2 class="anton">The sky has<br>gone silent.</h2><p class="sub">The geodesic cage around the planet fails. GNSS is the first thing to go.</p></div>
-        <div class="copy-card" data-copy="2"><h2 class="anton metal-text">We still know<br>where we are.</h2><p class="sub">The camera falls through a dying constellation onto terrain that still has a path.</p></div>
-        <div class="copy-card" data-copy="3"><h2 class="anton">The platform<br>keeps flying.</h2><p class="sub">A UAV holds the canyon when GNSS cannot be treated as the sole trusted source.</p></div>
-        <div class="copy-card" data-copy="4"><h2 class="anton">Cameras on the<br>airframe.</h2><p class="sub">Onboard visual sensing flies with the platform. Scroll moves the picture — frame by frame.</p></div>
-        <div class="copy-card" data-copy="5"><h2 class="anton">The camera is<br>the navigator.</h2><p class="sub">Visual features lock the cliffs. A mesh grows on the rock the platform can hold.</p></div>
-        <div class="copy-card" data-copy="6"><h2 class="anton">Visual lock.<br>Terrain understood.</h2><p class="sub">Onboard cameras hold the rock and the river when the constellation cannot.</p></div>
-        <div class="copy-card" data-copy="7"><h2 class="anton">GPS dies<br>in the canyon.</h2><p class="sub">Denial is a volume. A geometric shadow cut into messy terrain — not a status label.</p></div>
-        <div class="copy-card" data-copy="8"><h2 class="anton">The platform<br>keeps moving.</h2><p class="sub">Inside the shadow: visual ticks on the walls, inertial heading on the vehicle. Fusion keeps a path.</p></div>
+        <div class="copy-card is-on" data-copy="0"><h2 class="anton">The platform<br>keeps flying.</h2><p class="lead">Redefining navigation beyond GPS.</p></div>
+        <div class="copy-card" data-copy="1"><h2 class="anton">Cameras on the<br>airframe.</h2><p class="sub">A UAV holds the canyon when GNSS cannot be treated as the sole trusted source.</p></div>
+        <div class="copy-card" data-copy="2"><h2 class="anton metal-text">Obstructed.<br>Spoofed.<br>Denied.</h2><p class="sub">The geodesic cage around the planet fails. GNSS is the first thing to go.</p></div>
+        <div class="copy-card" data-copy="3"><h2 class="anton">The sky has<br>gone silent.</h2><p class="sub">The camera falls through a dying constellation onto terrain that still has a path.</p></div>
+        <div class="copy-card" data-copy="4"><h2 class="anton">The camera is<br>the navigator.</h2><p class="sub">Visual features lock the cliffs. A mesh grows on the rock the platform can hold.</p></div>
+        <div class="copy-card" data-copy="5"><h2 class="anton">Visual lock.<br>Terrain understood.</h2><p class="sub">Onboard cameras hold the rock and the river when the constellation cannot.</p></div>
+        <div class="copy-card" data-copy="6"><h2 class="anton">GPS dies<br>in the canyon.</h2><p class="sub">Denial is a volume. A geometric shadow cut into messy terrain — not a status label.</p></div>
+        <div class="copy-card" data-copy="7"><h2 class="anton">The platform<br>keeps moving.</h2><p class="sub">Inside the shadow: visual ticks on the walls, inertial heading on the vehicle. Fusion keeps a path.</p></div>
       </div>
     </div>
     <div class="acts">
-      <span data-a="0" class="on">Constellation</span>
-      <span data-a="1">The platform</span>
+      <span data-a="0" class="on">The platform</span>
+      <span data-a="1">Constellation</span>
       <span data-a="2">Visual lock</span>
       <span data-a="3">GNSS lock</span>
     </div>
-    <div class="scroll-cue"><span>Scroll to dive</span><span class="bar"><i></i></span></div>
+    <div class="scroll-cue"><span>Scroll</span><span class="bar"><i></i></span></div>
     <div class="progress"><i data-bar></i></div>
   </div>
-</div>
-
-<div class="ticker">
-  <span>Visual navigation</span><span>Fiber-optic gyroscope</span><span>Embedded electronics</span><span>Sensor fusion</span><span class="warn">Under staged development</span>
-</div>
-<div class="proof">
-  <span class="anton" style="font-size:18px; color:var(--silver);">NVIDIA Inception Program</span>
-  <span class="div"></span>
-  <span class="mono" style="font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#7A808A;">Indigenous development</span>
-  <span class="div"></span>
-  <span class="mono" style="font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#7A808A;">Hyderabad, India</span>
-  <span class="div"></span>
-  <span class="mono" style="font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#7A808A;">Platform-specific validation</span>
-</div>
-
-<section class="block" id="problem">
-  <span class="kicker amber">01 / The problem</span>
-  <h2 class="anton display">Satellite navigation<br>cannot be assumed.</h2>
-  <p style="margin-top:24px; max-width:560px; font-size:16.5px; line-height:1.76; color:var(--body); font-weight:300;">GNSS can be blocked or degraded indoors, underground, inside tunnels, near dense infrastructure, in urban canyons, or under foliage — and disrupted by interference, jamming, spoofing, or operational denial.</p>
-  <div class="grid-6" style="margin-top:48px;">
-    <div><span class="mono" style="font-size:10px; letter-spacing:.2em; color:var(--meta);">01</span><p style="margin-top:16px; font-size:16px;">Indoors and underground</p></div>
-    <div><span class="mono" style="font-size:10px; letter-spacing:.2em; color:var(--meta);">02</span><p style="margin-top:16px; font-size:16px;">Tunnels and dense infrastructure</p></div>
-    <div><span class="mono" style="font-size:10px; letter-spacing:.2em; color:var(--meta);">03</span><p style="margin-top:16px; font-size:16px;">Urban canyons and foliage</p></div>
-    <div><span class="mono" style="font-size:10px; letter-spacing:.2em; color:var(--amber);">04</span><p style="margin-top:16px; font-size:16px;">Interference and jamming</p></div>
-    <div><span class="mono" style="font-size:10px; letter-spacing:.2em; color:var(--amber);">05</span><p style="margin-top:16px; font-size:16px;">Spoofing and signal deception</p></div>
-    <div><span class="mono" style="font-size:10px; letter-spacing:.2em; color:var(--amber);">06</span><p style="margin-top:16px; font-size:16px;">Operational denial</p></div>
+  <div class="runway" aria-hidden="true"></div>
+  <div class="over-copy">
+    <div class="ticker">
+      <span>Visual navigation</span><span>Fiber-optic gyroscope</span><span>Embedded electronics</span><span>Sensor fusion</span><span class="warn">Under staged development</span>
+    </div>
+    <div class="proof">
+      <span class="anton" style="font-size:18px; color:var(--silver);">NVIDIA Inception Program</span>
+      <span class="div"></span>
+      <span class="mono" style="font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#7A808A;">Indigenous development</span>
+      <span class="div"></span>
+      <span class="mono" style="font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#7A808A;">Hyderabad, India</span>
+      <span class="div"></span>
+      <span class="mono" style="font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#7A808A;">Platform-specific validation</span>
+    </div>
+    <section class="block" id="problem">
+      <span class="kicker amber">01 / The problem</span>
+      <h2 class="anton display">Satellite navigation<br>cannot be assumed.</h2>
+      <p style="margin-top:24px; max-width:560px; font-size:16.5px; line-height:1.76; color:var(--body); font-weight:300;">GNSS can be blocked or degraded indoors, underground, inside tunnels, near dense infrastructure, in urban canyons, or under foliage — and disrupted by interference, jamming, spoofing, or operational denial.</p>
+      <div class="grid-6" style="margin-top:48px;">
+        <div><span class="mono" style="font-size:10px; letter-spacing:.2em; color:var(--meta);">01</span><p style="margin-top:16px; font-size:16px;">Indoors and underground</p></div>
+        <div><span class="mono" style="font-size:10px; letter-spacing:.2em; color:var(--meta);">02</span><p style="margin-top:16px; font-size:16px;">Tunnels and dense infrastructure</p></div>
+        <div><span class="mono" style="font-size:10px; letter-spacing:.2em; color:var(--meta);">03</span><p style="margin-top:16px; font-size:16px;">Urban canyons and foliage</p></div>
+        <div><span class="mono" style="font-size:10px; letter-spacing:.2em; color:var(--amber);">04</span><p style="margin-top:16px; font-size:16px;">Interference and jamming</p></div>
+        <div><span class="mono" style="font-size:10px; letter-spacing:.2em; color:var(--amber);">05</span><p style="margin-top:16px; font-size:16px;">Spoofing and signal deception</p></div>
+        <div><span class="mono" style="font-size:10px; letter-spacing:.2em; color:var(--amber);">06</span><p style="margin-top:16px; font-size:16px;">Operational denial</p></div>
+      </div>
+      <p style="margin-top:56px; max-width:980px; font-size:26px; line-height:1.4; font-weight:300; letter-spacing:-.018em;">The objective is not universal GPS replacement, but <b style="font-weight:600; color:#fff;">platform-specific navigation technology</b> for environments where GNSS is unavailable, degraded, or cannot be treated as the sole trusted source.</p>
+    </section>
   </div>
-  <p style="margin-top:56px; max-width:980px; font-size:26px; line-height:1.4; font-weight:300; letter-spacing:-.018em;">The objective is not universal GPS replacement, but <b style="font-weight:600; color:#fff;">platform-specific navigation technology</b> for environments where GNSS is unavailable, degraded, or cannot be treated as the sole trusted source.</p>
-</section>
+</div>
 
 <section class="block" id="technologies">
   <span class="kicker">02 / Core technologies</span>

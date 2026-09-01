@@ -80,9 +80,20 @@ nav a, nav span { font-family: "DM Mono", ui-monospace, monospace; font-size: 11
 }
 body.menu-open { overflow: hidden; }
 
-.track { position: relative; height: 1100vh; background: #020308; }
+.track { position: relative; background: #020308; }
+.runway { height: 640vh; pointer-events: none; }
+.over-copy { position: relative; z-index: 8; }
+.over-copy .ticker,
+.over-copy .proof,
+.over-copy .block {
+  background: rgba(8,9,11,.58);
+  backdrop-filter: blur(8px);
+}
+.hud.is-away,
+.acts.is-away,
+.scroll-cue.is-away { opacity: 0; pointer-events: none; transition: opacity .35s ease; }
 .stage-gl {
-  position: sticky; top: 0; height: 100vh; overflow: hidden; background: #020308;
+  position: sticky; top: 0; height: 100vh; overflow: hidden; background: #020308; z-index: 0;
 }
 .stage-gl > canvas#gl { display: block; width: 100%; height: 100%; position: relative; z-index: 0; }
 .stage-gl > canvas#gl.is-off { opacity: 0; }
@@ -187,7 +198,7 @@ footer { padding: 64px var(--gutter) 32px; }
 @media (max-width: 900px) {
   nav { display: none; }
   .menu-btn { display: inline-flex; }
-  .track { height: 880vh; }
+  .runway { height: 720vh; }
   .pin, .pin.tall { height: 220vh; }
   .acts { display: none; }
   .grid-6, .grid-4, .grid-3, .foot-grid { grid-template-columns: 1fr 1fr; }

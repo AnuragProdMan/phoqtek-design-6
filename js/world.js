@@ -203,20 +203,22 @@ export async function createWorld(canvas, opts = {}) {
   }
 
   function chapterOf(p) {
-    if (p < 0.24) return 0;
-    if (p < 0.48) return 1;
-    if (p < 0.72) return 2;
+    if (p < 0.18) return 0;
+    if (p < 0.36) return 1;
+    if (p < 0.54) return 2;
+    if (p < 0.72) return 3;
     return 3;
   }
   function localOf(p) {
-    if (p < 0.24) return p / 0.24;
-    if (p < 0.48) return (p - 0.24) / 0.24;
-    if (p < 0.72) return (p - 0.48) / 0.24;
-    return (p - 0.72) / 0.28;
+    if (p < 0.18) return p / 0.18;
+    if (p < 0.36) return (p - 0.18) / 0.18;
+    if (p < 0.54) return (p - 0.36) / 0.18;
+    if (p < 0.72) return (p - 0.54) / 0.18;
+    return 1;
   }
   function fadeOf(p) {
-    const d = Math.min(Math.abs(p - 0.24), Math.abs(p - 0.48), Math.abs(p - 0.72));
-    return 1 - smoothstep(0.0, 0.018, d);
+    const d = Math.min(Math.abs(p - 0.18), Math.abs(p - 0.36), Math.abs(p - 0.54), Math.abs(p - 0.72));
+    return 1 - smoothstep(0.0, 0.016, d);
   }
 
   function applySpace(t, dt) {
@@ -233,7 +235,7 @@ export async function createWorld(canvas, opts = {}) {
     const t = localOf(p);
     fade = fadeOf(p);
 
-    if (chapter === 0) {
+    if (chapter === 1) {
       applySpace(t, dt);
       if (composer) {
         space._rp.scene = space.scene;
