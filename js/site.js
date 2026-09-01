@@ -87,18 +87,19 @@
   let world = null;
 
   const seqDrone = document.getElementById('seqDrone');
+  const seqConstel = document.getElementById('seqConstel');
   const seqVisual = document.getElementById('seqVisual');
   const seqGnss = document.getElementById('seqGnss');
   const hud = document.querySelector('#stage .hud');
   const actsWrap = document.querySelector('#stage .acts');
   const cue = document.querySelector('#stage .scroll-cue');
-  const seqs = { drone: null, visual: null, gnss: null };
+  const seqs = { drone: null, constel: null, visual: null, gnss: null };
   const eyes = ['01 · The platform', '02 · Constellation', '03 · Visual lock', '04 · GNSS lock'];
   const statuses = [
     'UAV <b>IN FLIGHT</b>',
     'GNSS <b class="warn">LOCK → DENIED</b>',
-    'VNS <b>TERRAIN LOCK</b>',
-    'GNSS <b class="warn">DENIED</b>'
+    'GROUND · VNS <b>TERRAIN LOCK</b>',
+    'GUN · GNSS <b class="warn">DENIED</b>'
   ];
 
   function copyIndex(p) {
@@ -125,25 +126,13 @@
   }
 
   if (track && canvas) {
-    const mobile = window.innerWidth < 720 || (window.matchMedia && window.matchMedia('(pointer:coarse)').matches);
-    if (reduce) {
-      canvas.style.display = 'none';
-      if (fallback) fallback.hidden = false;
-    } else {
-      import('./world.js').then((m) => {
-        return Promise.resolve(m.createWorld(canvas, { reduced: false, mobile })).then((w) => {
-          world = w;
-        });
-      }).catch((err) => {
-        console.error('world module', err);
-        canvas.style.display = 'none';
-        if (fallback) fallback.hidden = false;
-      });
-    }
+    canvas.style.display = 'none';
+    if (reduce && fallback) fallback.hidden = false;
   }
   if (track) {
     import('./sequence.js').then((m) => {
       if (seqDrone) seqs.drone = m.createSequence(seqDrone, { count: 36, path: (n) => `assets/drone/frame-${n}.jpg`, reduced: reduce });
+      if (seqConstel) seqs.constel = m.createSequence(seqConstel, { count: 36, path: (n) => `assets/constel/frame-${n}.jpg`, reduced: reduce });
       if (seqVisual) seqs.visual = m.createSequence(seqVisual, { count: 36, path: (n) => `assets/visual/frame-${n}.jpg`, reduced: reduce });
       if (seqGnss) seqs.gnss = m.createSequence(seqGnss, { count: 36, path: (n) => `assets/gnss/frame-${n}.jpg`, reduced: reduce });
     }).catch((err) => console.error('sequence', err));
@@ -164,27 +153,30 @@
     if (hud) hud.classList.toggle('is-away', overlay);
     if (actsWrap) actsWrap.classList.toggle('is-away', overlay);
     if (cue) cue.classList.toggle('is-away', overlay);
-    if (canvas) canvas.classList.toggle('is-off', ch !== 1);
+    if (canvas) canvas.classList.add('is-off');
     if (seqDrone) seqDrone.classList.toggle('is-on', ch === 0);
+    if (seqConstel) seqConstel.classList.toggle('is-on', ch === 1);
     if (seqVisual) seqVisual.classList.toggle('is-on', ch === 2);
     if (seqGnss) seqGnss.classList.toggle('is-on', ch === 3);
     if (seqs.drone) seqs.drone.setProgress(localIn(p, 0, 0.18));
+    if (seqs.constel) seqs.constel.setProgress(localIn(p, 0.18, 0.36));
     if (seqs.visual) seqs.visual.setProgress(localIn(p, 0.36, 0.54));
     if (seqs.gnss) seqs.gnss.setProgress(localIn(p, 0.54, 0.72));
   }
 
   function frame() {
     if (header && !header.classList.contains('is-open')) {
-      header.classList.toggle('is-solid', (window.scrollY || 0) > 80);
+      const solid = track ? track.getBoundingClientRect().bottom < 88 : (window.scrollY || 0) > 24;
+      header.classList.toggle('is-solid', solid);
     }
     pins.forEach((p) => p.apply(p.progress()));
     if (track) applyTrack(progressOf(track));
     requestAnimationFrame(frame);
   }
 
+  if (header && !track) header.classList.add('is-solid');
   if (reduce && !track) {
     pins.forEach((p) => p.apply(0.25, true));
-    if (header) header.classList.toggle('is-solid', (window.scrollY || 0) > 80);
     return;
   }
   requestAnimationFrame(frame);

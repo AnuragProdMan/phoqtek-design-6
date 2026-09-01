@@ -7,7 +7,7 @@
 <meta name="description" content="PhoQtek Labs develops GPS-denied navigation technologies for defense, aerospace, unmanned systems, robotics, and industrial mobility.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Michroma&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/site.css">
 <script type="importmap">
 {
@@ -21,9 +21,9 @@
 <body>
 <header id="siteHeader">
   <a class="brand" href="index.html">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10.2" stroke="#C9CDD4" stroke-width="1.5"/><ellipse cx="12" cy="12" rx="4.2" ry="10.2" stroke="#3A3F47" stroke-width="1.1"/><path d="M1.8 12h20.4" stroke="#3A3F47" stroke-width="1.1"/><circle cx="12" cy="12" r="2.1" fill="#C9CDD4"/></svg>
-    <span class="anton" style="font-size:20px;">PhoQtek</span>
-    <span class="mono" style="font-size:9.5px; letter-spacing:.26em; color:var(--meta);">LABS</span>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10.2" stroke="currentColor" stroke-width="1.5"/><ellipse cx="12" cy="12" rx="4.2" ry="10.2" stroke="currentColor" opacity=".45" stroke-width="1.1"/><path d="M1.8 12h20.4" stroke="currentColor" opacity=".45" stroke-width="1.1"/><circle cx="12" cy="12" r="2.1" fill="currentColor"/></svg>
+    <span class="wordmark" style="font-size:15px;">Pho<span class="q">Q</span>tek</span>
+    <span class="mono" style="font-size:9.5px; letter-spacing:.26em;">LABS</span>
   </a>
   <nav>
     <div class="fly hide-sm"><span>Technologies</span>
@@ -53,6 +53,7 @@
   <div class="stage-gl" id="stage">
     <canvas id="gl" class="is-off" aria-hidden="true"></canvas>
     <canvas id="seqDrone" class="act-seq is-on" aria-hidden="true"></canvas>
+    <canvas id="seqConstel" class="act-seq" aria-hidden="true"></canvas>
     <canvas id="seqVisual" class="act-seq" aria-hidden="true"></canvas>
     <canvas id="seqGnss" class="act-seq" aria-hidden="true"></canvas>
     <div class="gl-fallback" id="glFallback" hidden>
@@ -68,12 +69,12 @@
       <div class="copy-stack">
         <div class="copy-card is-on" data-copy="0"><h2 class="anton">The platform<br>keeps flying.</h2><p class="lead">Redefining navigation beyond GPS.</p></div>
         <div class="copy-card" data-copy="1"><h2 class="anton">Cameras on the<br>airframe.</h2><p class="sub">A UAV holds the canyon when GNSS cannot be treated as the sole trusted source.</p></div>
-        <div class="copy-card" data-copy="2"><h2 class="anton metal-text">Obstructed.<br>Spoofed.<br>Denied.</h2><p class="sub">The geodesic cage around the planet fails. GNSS is the first thing to go.</p></div>
-        <div class="copy-card" data-copy="3"><h2 class="anton">The sky has<br>gone silent.</h2><p class="sub">The camera falls through a dying constellation onto terrain that still has a path.</p></div>
-        <div class="copy-card" data-copy="4"><h2 class="anton">The camera is<br>the navigator.</h2><p class="sub">Visual features lock the cliffs. A mesh grows on the rock the platform can hold.</p></div>
-        <div class="copy-card" data-copy="5"><h2 class="anton">Visual lock.<br>Terrain understood.</h2><p class="sub">Onboard cameras hold the rock and the river when the constellation cannot.</p></div>
-        <div class="copy-card" data-copy="6"><h2 class="anton">GPS dies<br>in the canyon.</h2><p class="sub">Denial is a volume. A geometric shadow cut into messy terrain — not a status label.</p></div>
-        <div class="copy-card" data-copy="7"><h2 class="anton">The platform<br>keeps moving.</h2><p class="sub">Inside the shadow: visual ticks on the walls, inertial heading on the vehicle. Fusion keeps a path.</p></div>
+        <div class="copy-card" data-copy="2"><h2 class="anton metal-text">Obstructed.<br>Spoofed.<br>Denied.</h2><p class="sub">The constellation is a machine assembling in orbit. It is the first thing to go.</p></div>
+        <div class="copy-card" data-copy="3"><h2 class="anton">The sky has<br>gone silent.</h2><p class="sub">White buses lock into the plane. The platform cannot treat them as the sole trusted source.</p></div>
+        <div class="copy-card" data-copy="4"><h2 class="anton">The camera is<br>the navigator.</h2><p class="sub">Visual features lock the desert. Ground platforms hold the terrain.</p></div>
+        <div class="copy-card" data-copy="5"><h2 class="anton">Visual lock.<br>Terrain understood.</h2><p class="sub">Onboard sensing holds the dunes when the constellation cannot.</p></div>
+        <div class="copy-card" data-copy="6"><h2 class="anton">GPS dies<br>in the desert.</h2><p class="sub">Dust. Contested terrain. The sky cannot be trusted.</p></div>
+        <div class="copy-card" data-copy="7"><h2 class="anton">The platform<br>keeps moving.</h2><p class="sub">The gun holds in the pit. Fusion keeps a path.</p></div>
       </div>
     </div>
     <div class="acts">
@@ -142,7 +143,7 @@
   </div>
 </section>
 
-<section class="block" id="industries" style="background:var(--band);">
+<section class="block" id="industries" style="background:var(--cream);">
   <span class="kicker">03 / Industries</span>
   <h2 class="anton display">Platforms operating<br>beyond reliable GNSS.</h2>
   <div class="grid-3" style="margin-top:48px;">
