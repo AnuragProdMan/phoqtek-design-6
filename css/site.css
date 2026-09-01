@@ -22,12 +22,21 @@ header {
   display: flex; align-items: center; justify-content: space-between;
   gap: 16px; min-width: 0;
   padding: 0 var(--gutter); height: 76px;
-  background: linear-gradient(to bottom, rgba(8,9,11,.62), transparent);
+  background: rgba(8,9,11,.92);
+  border-bottom: 1px solid rgba(224,162,74,.42);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 12px 32px rgba(0,0,0,.45);
 }
-header.is-solid, header.is-open { background: rgba(8,9,11,.92); border-bottom: 1px solid var(--line-soft); backdrop-filter: blur(10px); }
+header.is-solid, header.is-open { background: rgba(8,9,11,.96); }
 .brand { display: flex; align-items: center; gap: 12px; color: var(--white); min-width: 0; flex-shrink: 0; margin-right: auto; }
+.brand .mono { color: var(--silver); }
 nav { display: flex; align-items: center; gap: 26px; min-width: 0; }
-nav a, nav span { font-family: "DM Mono", ui-monospace, monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--silver); }
+nav a, nav span {
+  font-family: "DM Mono", ui-monospace, monospace;
+  font-size: 12px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--white);
+}
+nav a:hover, nav span:hover { color: var(--amber); }
 .fly { position: relative; }
 .fly:hover .fly-menu, .fly:focus-within .fly-menu { display: block; }
 .fly-menu { display: none; position: absolute; top: 100%; left: 0; min-width: 260px; padding-top: 12px; }
@@ -46,8 +55,8 @@ nav a, nav span { font-family: "DM Mono", ui-monospace, monospace; font-size: 11
 .nav-cta .short { display: none; }
 .menu-btn {
   display: none; width: 38px; height: 38px; min-width: 38px; padding: 0;
-  margin-left: auto; flex-shrink: 0; box-sizing: border-box;
-  border: 1px solid var(--silver); background: transparent; color: var(--silver);
+  margin-left: 0; flex-shrink: 0; box-sizing: border-box;
+  border: 1px solid var(--white); background: transparent; color: var(--white);
   align-items: center; justify-content: center; flex-direction: column; gap: 6px;
   cursor: pointer; -webkit-appearance: none; appearance: none;
 }
