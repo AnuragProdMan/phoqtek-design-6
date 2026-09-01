@@ -185,4 +185,16 @@
     return;
   }
   requestAnimationFrame(frame);
+
+  const inq = document.getElementById('inqForm');
+  if (inq) {
+    inq.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const fd = new FormData(inq);
+      const lines = [];
+      fd.forEach((v, k) => { if (String(v).trim()) lines.push(k + ': ' + v); });
+      const href = 'mailto:info@phoqtek.ai?subject=' + encodeURIComponent('GPS-denied navigation requirement') + '&body=' + encodeURIComponent(lines.join('\n'));
+      window.location.href = href;
+    });
+  }
 })();

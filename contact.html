@@ -52,18 +52,61 @@
   </div>
 </div>
 <section class="block">
-  <div class="cta-row">
-    <div>
-      <p class="mono" style="font-size:13px;">info@phoqtek.ai</p>
-      <p class="mono" style="margin-top:8px; font-size:13px; color:var(--body);">Hyderabad, India</p>
-    </div>
-    <div style="display:flex; flex-direction:column; gap:12px;">
-      <a class="btn-solid" href="https://phoqtek.ai/contact/">Submit a requirement</a>
-      <a class="btn-line" href="https://phoqtek.ai/contact/">Technical discussion</a>
-    </div>
-  </div>
+  <span class="kicker">Partner with us for</span>
+  <h2 class="anton display">Technical discussions<br>and platform work.</h2>
+  <ul class="use-list">
+    <li>GPS-denied navigation technology development</li>
+    <li>Visual Navigation System integration</li>
+    <li>Fiber-Optic Gyroscope development discussions</li>
+    <li>Inertial sensing and navigation-stack development</li>
+    <li>UAV/UGV navigation support</li>
+    <li>Defense and aerospace navigation R&amp;D</li>
+    <li>Robotics and autonomous systems navigation</li>
+    <li>Industrial and underground navigation use cases</li>
+    <li>Prototype demonstrators</li>
+    <li>Platform-specific validation programs</li>
+  </ul>
+  <p style="margin-top:32px; max-width:720px; color:var(--body); font-weight:300; line-height:1.75;">PhoQtek Labs is open to technical discussions, R&amp;D partnerships, prototype development, system-integration opportunities, and customer-specific navigation demonstrators.</p>
+  <p class="mono" style="margin-top:22px; font-size:13px;">info@phoqtek.ai · Hyderabad, India</p>
 </section>
-<footer><p class="mono" style="font-size:11px; color:#4E545C;">© 2026 PhoQtek Labs</p></footer>
+<section class="block" id="inquire" style="background:var(--band);">
+  <span class="kicker">Inquiry</span>
+  <h2 class="anton display">Submit a requirement.</h2>
+  <p style="margin-top:18px; max-width:640px; color:var(--body); font-weight:300; line-height:1.7;">Contact pages do not promise delivery timelines or performance before technical review.</p>
+  <form id="inqForm" class="inq">
+    <label>Name<input name="Name" required></label>
+    <label>Organization<input name="Organization"></label>
+    <label>Email<input type="email" name="Email" required></label>
+    <label>Phone<input type="tel" name="Phone"></label>
+    <label>Industry
+      <select name="Industry">
+        <option value="">Select</option>
+        <option>Defense</option>
+        <option>Aerospace</option>
+        <option>UAV &amp; UGV</option>
+        <option>Robotics</option>
+        <option>Autonomous vehicles</option>
+        <option>Industrial &amp; underground</option>
+        <option>Other</option>
+      </select>
+    </label>
+    <label>Platform type<input name="Platform type"></label>
+    <label>Application area<input name="Application area"></label>
+    <label>Operating environment<input name="Operating environment"></label>
+    <label class="full">Current navigation challenge<textarea name="Current navigation challenge"></textarea></label>
+    <label>Required timeline<input name="Required timeline"></label>
+    <label class="full">Message<textarea name="Message"></textarea></label>
+    <div class="full cta-pair" style="margin-top:8px;">
+      <button class="btn-solid" type="submit">Submit requirement</button>
+      <a class="btn-line" href="mailto:info@phoqtek.ai">Email PhoQtek Labs</a>
+      <a class="btn-line" href="mailto:info@phoqtek.ai?subject=Technical%20discussion">Schedule a technical discussion</a>
+    </div>
+  </form>
+</section>
+<footer>
+  <p class="foot-claim">PhoQtek Labs develops navigation technologies and prototypes for defined use cases. Unless explicitly stated, website content should not be interpreted as a claim of certification, qualification, combat deployment, flight certification, military-grade compliance, or universal GPS replacement capability.</p>
+  <p class="mono foot-copy">© 2026 PhoQtek Labs · GPS-denied navigation technologies under staged development.</p>
+</footer>
 <script src="js/site.js"></script>
 </body>
 </html>
