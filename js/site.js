@@ -86,11 +86,13 @@
   const fallback = document.getElementById('glFallback');
   let world = null;
 
-  const eyes = ['01 · Constellation', '02 · Visual lock', '03 · GNSS shadow'];
+  const filmVisual = document.getElementById('filmVisual');
+  const filmGnss = document.getElementById('filmGnss');
+  const eyes = ['01 · Constellation', '02 · Visual lock', '03 · GNSS lock'];
   const statuses = [
     'GNSS <b class="warn">LOCK → DENIED</b>',
     'VNS <b>TERRAIN LOCK</b>',
-    'INERTIAL <b>HEADING HOLD</b>'
+    'GNSS <b class="warn">DENIED</b>'
   ];
 
   function copyIndex(p) {
@@ -140,6 +142,9 @@
     acts.forEach((el, i) => el.classList.toggle('on', i === ch));
     if (eye) eye.textContent = eyes[ch];
     if (status) status.innerHTML = statuses[ch];
+    if (canvas) canvas.classList.toggle('is-off', ch !== 0);
+    if (filmVisual) filmVisual.classList.toggle('is-on', ch === 1);
+    if (filmGnss) filmGnss.classList.toggle('is-on', ch === 2);
   }
 
   function frame() {

@@ -52,6 +52,12 @@
 <div class="track" id="track">
   <div class="stage-gl" id="stage">
     <canvas id="gl" aria-hidden="true"></canvas>
+    <div class="act-film" id="filmVisual">
+      <video autoplay muted loop playsinline poster="assets/cinematic/visual-lock.jpg"><source src="assets/cinematic/visual-lock.mp4" type="video/mp4"></video>
+    </div>
+    <div class="act-film" id="filmGnss">
+      <video autoplay muted loop playsinline poster="assets/cinematic/gnss-canyon.jpg"><source src="assets/cinematic/gnss-canyon.mp4" type="video/mp4"></video>
+    </div>
     <div class="gl-fallback" id="glFallback" hidden>
       <video autoplay muted loop playsinline poster="assets/cinematic/constellation.jpg"><source src="assets/cinematic/constellation.mp4" type="video/mp4"></video>
     </div>
@@ -66,16 +72,16 @@
         <div class="copy-card is-on" data-copy="0"><h2 class="anton metal-text">Obstructed.<br>Spoofed.<br>Denied.</h2><p class="lead">Redefining navigation beyond GPS.</p></div>
         <div class="copy-card" data-copy="1"><h2 class="anton">The sky has<br>gone silent.</h2><p class="sub">The geodesic cage around the planet fails. GNSS is the first thing to go.</p></div>
         <div class="copy-card" data-copy="2"><h2 class="anton metal-text">We still know<br>where we are.</h2><p class="sub">The camera falls through a dying constellation onto terrain that still has a path.</p></div>
-        <div class="copy-card" data-copy="3"><h2 class="anton">The camera is<br>the navigator.</h2><p class="sub">A frustum locks the gorge. Sparse visual features stitch a mesh the platform can hold.</p></div>
-        <div class="copy-card" data-copy="4"><h2 class="anton">Visual lock.<br>Terrain understood.</h2><p class="sub">Onboard cameras hold the rock and the river. Satellite rays stop at the rim.</p></div>
-        <div class="copy-card" data-copy="5"><h2 class="anton">GPS dies<br>in the gorge.</h2><p class="sub">Denial is a volume. A geometric shadow cut into messy terrain — not a status label.</p></div>
+        <div class="copy-card" data-copy="3"><h2 class="anton">The camera is<br>the navigator.</h2><p class="sub">Visual features lock the cliffs. A mesh grows on the rock the platform can hold.</p></div>
+        <div class="copy-card" data-copy="4"><h2 class="anton">Visual lock.<br>Terrain understood.</h2><p class="sub">Onboard cameras hold the rock and the river when the constellation cannot.</p></div>
+        <div class="copy-card" data-copy="5"><h2 class="anton">GPS dies<br>in the canyon.</h2><p class="sub">Denial is a volume. A geometric shadow cut into messy terrain — not a status label.</p></div>
         <div class="copy-card" data-copy="6"><h2 class="anton">The platform<br>keeps moving.</h2><p class="sub">Inside the shadow: visual ticks on the walls, inertial heading on the vehicle. Fusion keeps a path.</p></div>
       </div>
     </div>
     <div class="acts">
       <span data-a="0" class="on">Constellation</span>
       <span data-a="1">Visual lock</span>
-      <span data-a="2">GNSS shadow</span>
+      <span data-a="2">GNSS lock</span>
     </div>
     <div class="scroll-cue"><span>Scroll to dive</span><span class="bar"><i></i></span></div>
     <div class="progress"><i data-bar></i></div>

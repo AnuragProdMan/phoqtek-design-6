@@ -119,8 +119,6 @@ export function createWorld(canvas, opts = {}) {
 
   const clock = new THREE.Clock();
   const space = buildSpace(mobile);
-  const gorge = buildGorge(mobile);
-  const shadow = buildShadow(mobile);
 
   let composer = null;
   if (!mobile && !reduced) {
@@ -150,10 +148,8 @@ export function createWorld(canvas, opts = {}) {
     h = Math.max(1, Math.floor(rect.height));
     renderer.setSize(w, h, false);
     const aspect = w / h;
-    [space, gorge, shadow].forEach((wld) => {
-      wld.camera.aspect = aspect;
-      wld.camera.updateProjectionMatrix();
-    });
+    space.camera.aspect = aspect;
+    space.camera.updateProjectionMatrix();
     if (composer) {
       composer.setSize(w, h);
       space._bloom.resolution.set(w, h);
@@ -188,12 +184,6 @@ export function createWorld(canvas, opts = {}) {
     space.group.rotation.y += dt * 0.015 * (1 - dive);
     space.update(t, shatter, dive, dt);
   }
-  function applyGorge(t, dt) {
-    gorge.update(t, dt);
-  }
-  function applyShadow(t, dt) {
-    shadow.update(t, dt);
-  }
 
   function frame() {
     const dt = Math.min(clock.getDelta(), 0.05);
@@ -202,17 +192,15 @@ export function createWorld(canvas, opts = {}) {
     const t = localOf(p);
     fade = fadeOf(p);
 
-    if (chapter === 0) applySpace(t, dt);
-    else if (chapter === 1) applyGorge(t, dt);
-    else applyShadow(t, dt);
-
-    const world = chapter === 0 ? space : chapter === 1 ? gorge : shadow;
-    if (chapter === 0 && composer) {
-      space._rp.scene = space.scene;
-      space._rp.camera = space.camera;
-      composer.render();
-    } else {
-      renderer.render(world.scene, world.camera);
+    if (chapter === 0) {
+      applySpace(t, dt);
+      if (composer) {
+        space._rp.scene = space.scene;
+        space._rp.camera = space.camera;
+        composer.render();
+      } else {
+        renderer.render(space.scene, space.camera);
+      }
     }
     requestAnimationFrame(frame);
   }
