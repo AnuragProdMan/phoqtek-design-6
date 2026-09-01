@@ -117,13 +117,9 @@
       if (fallback) fallback.hidden = false;
     } else {
       import('./world.js').then((m) => {
-        try {
-          world = m.createWorld(canvas, { reduced: false, mobile });
-        } catch (err) {
-          console.error('createWorld', err);
-          canvas.style.display = 'none';
-          if (fallback) fallback.hidden = false;
-        }
+        return Promise.resolve(m.createWorld(canvas, { reduced: false, mobile })).then((w) => {
+          world = w;
+        });
       }).catch((err) => {
         console.error('world module', err);
         canvas.style.display = 'none';
