@@ -99,7 +99,7 @@
     'UAV <b>IN FLIGHT</b>',
     'GNSS <b class="warn">LOCK → DENIED</b>',
     'GROUND · VNS <b>TERRAIN LOCK</b>',
-    'GUN · GNSS <b class="warn">DENIED</b>'
+    'CONVOY · GNSS <b class="warn">DENIED</b>'
   ];
 
   function copyIndex(p) {
