@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PhoQtek Labs — GPS-denied navigation</title>
+<meta name="description" content="PhoQtek Labs develops GPS-denied navigation technologies for defense, aerospace, unmanned systems, robotics, and industrial mobility.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<header id="siteHeader">
+  <a class="brand" href="index.html">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10.2" stroke="#C9CDD4" stroke-width="1.5"/><ellipse cx="12" cy="12" rx="4.2" ry="10.2" stroke="#3A3F47" stroke-width="1.1"/><path d="M1.8 12h20.4" stroke="#3A3F47" stroke-width="1.1"/><circle cx="12" cy="12" r="2.1" fill="#C9CDD4"/></svg>
+    <span class="anton" style="font-size:20px;">PhoQtek</span>
+    <span class="mono" style="font-size:9.5px; letter-spacing:.26em; color:var(--meta);">LABS</span>
+  </a>
+  <nav>
+    <div class="fly hide-sm"><span>Technologies</span>
+      <div class="fly-menu"><div>
+        <a href="technologies/visual-navigation.html">Visual Navigation System</a>
+        <a href="technologies/fiber-optic-gyroscope.html">Fiber-Optic Gyroscope</a>
+      </div></div>
+    </div>
+    <div class="fly hide-sm"><span>Industries</span>
+      <div class="fly-menu wide"><div>
+        <a href="industries/defense.html">Defense</a>
+        <a href="industries/aerospace.html">Aerospace</a>
+        <a href="industries/uav-ugv.html">UAV &amp; UGV</a>
+        <a href="industries/robotics.html">Robotics</a>
+        <a href="industries/autonomous-vehicles.html">Autonomous Vehicles</a>
+        <a href="industries/industrial-underground.html">Industrial &amp; Underground</a>
+      </div></div>
+    </div>
+    <a href="about.html">About</a>
+    <a href="roadmap.html">R&amp;D Roadmap</a>
+    <a class="nav-cta" href="contact.html">Discuss a requirement</a>
+  </nav>
+  <button class="menu-btn" type="button" aria-label="Open menu" aria-controls="mobileNav" aria-expanded="false"><span></span><span></span></button>
+</header>
+
+<div class="track" id="track">
+  <div class="stage-gl" id="stage">
+    <canvas id="gl" aria-hidden="true"></canvas>
+    <div class="gl-fallback" id="glFallback" hidden>
+      <video autoplay muted loop playsinline poster="assets/cinematic/constellation.jpg"><source src="assets/cinematic/constellation.mp4" type="video/mp4"></video>
+    </div>
+    <div class="gl-fade" id="glFade"></div>
+    <div class="veil grain"></div>
+    <div class="hud">
+      <div class="hud-top">
+        <div class="eyebrow"><i></i><span class="mono" id="hudEye" style="font-size:10.5px; letter-spacing:.26em; text-transform:uppercase; color:var(--silver);">01 · Constellation</span></div>
+        <div class="status" id="hudStatus">GNSS <b class="warn">LOCK → DENIED</b></div>
+      </div>
+      <div class="copy-stack">
+        <div class="copy-card is-on" data-copy="0"><h2 class="anton metal-text">Obstructed.<br>Spoofed.<br>Denied.</h2><p class="lead">Redefining navigation beyond GPS.</p></div>
+        <div class="copy-card" data-copy="1"><h2 class="anton">The sky has<br>gone silent.</h2><p class="sub">The geodesic cage around the planet fails. GNSS is the first thing to go.</p></div>
+        <div class="copy-card" data-copy="2"><h2 class="anton metal-text">We still know<br>where we are.</h2><p class="sub">The camera falls through a dying constellation onto terrain that still has a path.</p></div>
+        <div class="copy-card" data-copy="3"><h2 class="anton">The camera is<br>the navigator.</h2><p class="sub">A frustum locks the gorge. Sparse visual features stitch a mesh the platform can hold.</p></div>
+        <div class="copy-card" data-copy="4"><h2 class="anton">Visual lock.<br>Terrain understood.</h2><p class="sub">Onboard cameras hold the rock and the river. Satellite rays stop at the rim.</p></div>
+        <div class="copy-card" data-copy="5"><h2 class="anton">GPS dies<br>in the gorge.</h2><p class="sub">Denial is a volume. A geometric shadow cut into messy terrain — not a status label.</p></div>
+        <div class="copy-card" data-copy="6"><h2 class="anton">The platform<br>keeps moving.</h2><p class="sub">Inside the shadow: visual ticks on the walls, inertial heading on the vehicle. Fusion keeps a path.</p></div>
+      </div>
+    </div>
+    <div class="acts">
+      <span data-a="0" class="on">Constellation</span>
+      <span data-a="1">Visual lock</span>
+      <span data-a="2">GNSS shadow</span>
+    </div>
+    <div class="scroll-cue"><span>Scroll to dive</span><span class="bar"><i></i></span></div>
+    <div class="progress"><i data-bar></i></div>
+  </div>
+</div>
+
+<div class="ticker">
+  <span>Visual navigation</span><span>Fiber-optic gyroscope</span><span>Embedded electronics</span><span>Sensor fusion</span><span class="warn">Under staged development</span>
+</div>
+<div class="proof">
+  <span class="anton" style="font-size:18px; color:var(--silver);">NVIDIA Inception Program</span>
+  <span class="div"></span>
+  <span class="mono" style="font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#7A808A;">Indigenous development</span>
+  <span class="div"></span>
+  <span class="mono" style="font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#7A808A;">Hyderabad, India</span>
+  <span class="div"></span>
+  <span class="mono" style="font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#7A808A;">Platform-specific validation</span>
+</div>
+
+<section class="block" id="problem">
+  <span class="kicker amber">01 / The problem</span>
+  <h2 class="anton display">Satellite navigation<br>cannot be assumed.</h2>
+  <p style="margin-top:24px; max-width:560px; font-size:16.5px; line-height:1.76; color:var(--body); font-weight:300;">GNSS can be blocked or degraded indoors, underground, inside tunnels, near dense infrastructure, in urban canyons, or under foliage — and disrupted by interference, jamming, spoofing, or operational denial.</p>
+  <div class="grid-6" style="margin-top:48px;">
+    <div><span class="mono" style="font-size:10px; letter-spacing:.2em; color:var(--meta);">01</span><p style="margin-top:16px; font-size:16px;">Indoors and underground</p></div>
+    <div><span class="mono" style="font-size:10px; letter-spacing:.2em; color:var(--meta);">02</span><p style="margin-top:16px; font-size:16px;">Tunnels and dense infrastructure</p></div>
+    <div><span class="mono" style="font-size:10px; letter-spacing:.2em; color:var(--meta);">03</span><p style="margin-top:16px; font-size:16px;">Urban canyons and foliage</p></div>
+    <div><span class="mono" style="font-size:10px; letter-spacing:.2em; color:var(--amber);">04</span><p style="margin-top:16px; font-size:16px;">Interference and jamming</p></div>
+    <div><span class="mono" style="font-size:10px; letter-spacing:.2em; color:var(--amber);">05</span><p style="margin-top:16px; font-size:16px;">Spoofing and signal deception</p></div>
+    <div><span class="mono" style="font-size:10px; letter-spacing:.2em; color:var(--amber);">06</span><p style="margin-top:16px; font-size:16px;">Operational denial</p></div>
+  </div>
+  <p style="margin-top:56px; max-width:980px; font-size:26px; line-height:1.4; font-weight:300; letter-spacing:-.018em;">The objective is not universal GPS replacement, but <b style="font-weight:600; color:#fff;">platform-specific navigation technology</b> for environments where GNSS is unavailable, degraded, or cannot be treated as the sole trusted source.</p>
+</section>
+
+<section class="block" id="technologies">
+  <span class="kicker">02 / Core technologies</span>
+  <h2 class="anton display">Four development<br>streams.</h2>
+  <p style="margin-top:20px; max-width:560px; color:var(--body); font-weight:300; line-height:1.7;">PhoQtek approaches GPS-denied navigation as a system-level engineering challenge spanning photonics, inertial sensing, visual navigation, embedded systems, and integration.</p>
+  <div class="grid-4" style="margin-top:48px;">
+    <a href="technologies/visual-navigation.html">
+      <h3 class="anton" style="font-size:22px;">Visual Navigation System</h3>
+      <p style="font-size:14.5px; line-height:1.7; color:#7A808A; font-weight:300;">Onboard visual sensing and embedded processing to provide navigation-relevant information in GNSS-degraded environments.</p>
+      <span class="mono" style="font-size:10px; letter-spacing:.2em; text-transform:uppercase;">Open page →</span>
+    </a>
+    <a href="technologies/fiber-optic-gyroscope.html">
+      <h3 class="anton" style="font-size:22px;">Fiber-Optic Gyroscope</h3>
+      <p style="font-size:14.5px; line-height:1.7; color:#7A808A; font-weight:300;">Optical inertial sensing under development, contributing angular-rate information to the navigation stack.</p>
+      <span class="mono" style="font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--amber);">Staged development →</span>
+    </a>
+    <div>
+      <h3 class="anton" style="font-size:22px;">Embedded Electronics</h3>
+      <p style="font-size:14.5px; line-height:1.7; color:#7A808A; font-weight:300;">Onboard processing, sensor interfaces, data handling, and platform integration within power and thermal constraints.</p>
+    </div>
+    <div>
+      <h3 class="anton" style="font-size:22px;">Sensor-Fusion Engineering</h3>
+      <p style="font-size:14.5px; line-height:1.7; color:#7A808A; font-weight:300;">Complementary sensing architectures combining visual, inertial, platform, and mission-relevant inputs under defined operating conditions.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="industries" style="background:var(--band);">
+  <span class="kicker">03 / Industries</span>
+  <h2 class="anton display">Platforms operating<br>beyond reliable GNSS.</h2>
+  <div class="grid-3" style="margin-top:48px;">
+    <a href="industries/defense.html" style="display:block;"><span class="anton" style="font-size:15px; color:var(--meta);">01</span><h3 class="anton" style="margin-top:16px; font-size:24px;">Defense</h3><p style="margin-top:14px; font-size:14.5px; line-height:1.65; color:#7A808A; font-weight:300;">Navigation resilience for platforms expected to operate in GNSS-degraded, GNSS-denied, and electronically contested environments.</p></a>
+    <a href="industries/aerospace.html" style="display:block;"><span class="anton" style="font-size:15px; color:var(--meta);">02</span><h3 class="anton" style="margin-top:16px; font-size:24px;">Aerospace</h3><p style="margin-top:14px; font-size:14.5px; line-height:1.65; color:#7A808A; font-weight:300;">Navigation resilience and inertial backup for aerospace and autonomous flight systems in operationally complex environments.</p></a>
+    <a href="industries/uav-ugv.html" style="display:block;"><span class="anton" style="font-size:15px; color:var(--meta);">03</span><h3 class="anton" style="margin-top:16px; font-size:24px;">UAV &amp; UGV</h3><p style="margin-top:14px; font-size:14.5px; line-height:1.65; color:#7A808A; font-weight:300;">Reducing single-point dependence on GNSS for unmanned aerial and ground platforms through complementary onboard sensing.</p></a>
+    <a href="industries/robotics.html" style="display:block;"><span class="anton" style="font-size:15px; color:var(--meta);">04</span><h3 class="anton" style="margin-top:16px; font-size:24px;">Robotics</h3><p style="margin-top:14px; font-size:14.5px; line-height:1.65; color:#7A808A; font-weight:300;">Navigation technologies for robots operating indoors, in industrial facilities, infrastructure environments, and GNSS-limited areas.</p></a>
+    <a href="industries/autonomous-vehicles.html" style="display:block;"><span class="anton" style="font-size:15px; color:var(--meta);">05</span><h3 class="anton" style="margin-top:16px; font-size:24px;">Autonomous Vehicles</h3><p style="margin-top:14px; font-size:14.5px; line-height:1.65; color:#7A808A; font-weight:300;">Navigation-relevant sensing for autonomous mobility in urban canyons, tunnels, underpasses, and GNSS-obstructed corridors.</p></a>
+    <a href="industries/industrial-underground.html" style="display:block;"><span class="anton" style="font-size:15px; color:var(--meta);">06</span><h3 class="anton" style="margin-top:16px; font-size:24px;">Industrial &amp; Underground</h3><p style="margin-top:14px; font-size:14.5px; line-height:1.65; color:#7A808A; font-weight:300;">Tunnels, mines, pipe-jacking, trenchless construction support, indoor inspection, and underground corridor navigation.</p></a>
+  </div>
+</section>
+
+<section class="block">
+  <div class="claim">
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" style="flex-shrink:0; margin-top:3px;"><circle cx="9" cy="9" r="7.5" stroke="#E0A24A" stroke-width="1.2"/><path d="M9 5v5M9 12.6v.6" stroke="#E0A24A" stroke-width="1.4" stroke-linecap="round"/></svg>
+    <div>
+      <span class="mono" style="font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:var(--amber);">Claim boundary</span>
+      <p style="margin-top:12px; font-size:14.5px; line-height:1.8; color:var(--body); font-weight:300;">PhoQtek’s GPS-denied navigation technologies are under staged development and platform-specific validation. Performance depends on platform dynamics, environment, sensor configuration, mission duration, compute resources, mechanical integration, and operating conditions. Public performance claims are made only after controlled testing and application-specific evaluation.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="contact">
+  <div class="cta-row">
+    <div>
+      <h2 class="anton metal-text cta-title">Discuss a GPS-denied<br>navigation requirement.</h2>
+      <p style="margin-top:22px; max-width:560px; color:var(--body); font-weight:300; line-height:1.7;">PhoQtek Labs works with defense users, aerospace teams, UAV/UGV developers, robotics companies, system integrators, laboratories, and industrial partners.</p>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:12px;">
+      <a class="btn-solid" href="contact.html">Submit a requirement</a>
+      <a class="btn-line" href="https://phoqtek.ai/contact/">Technical discussion</a>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="foot-grid">
+    <div>
+      <p class="anton" style="font-size:20px;">PhoQtek Labs</p>
+      <p style="margin-top:14px; color:#7A808A; max-width:320px; font-weight:300; line-height:1.6;">GPS-denied navigation technologies for defense, aerospace, unmanned systems, robotics, and industrial mobility.</p>
+      <p class="mono" style="margin-top:18px; font-size:13px;">info@phoqtek.ai</p>
+    </div>
+    <div>
+      <p class="mono" style="font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:var(--meta);">Technologies</p>
+      <p style="margin-top:12px; line-height:2;"><a href="technologies/visual-navigation.html">Visual Navigation System</a><br><a href="technologies/fiber-optic-gyroscope.html">Fiber-Optic Gyroscope</a></p>
+    </div>
+    <div>
+      <p class="mono" style="font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:var(--meta);">Industries</p>
+      <p style="margin-top:12px; line-height:2;"><a href="industries/defense.html">Defense</a><br><a href="industries/aerospace.html">Aerospace</a><br><a href="industries/uav-ugv.html">UAV &amp; UGV</a><br><a href="industries/robotics.html">Robotics</a></p>
+    </div>
+    <div>
+      <p class="mono" style="font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:var(--meta);">Company</p>
+      <p style="margin-top:12px; line-height:2;"><a href="about.html">About</a><br><a href="roadmap.html">R&amp;D Roadmap</a><br><a href="contact.html">Contact</a></p>
+    </div>
+  </div>
+  <p class="mono" style="margin-top:40px; font-size:11px; color:#4E545C;">© 2026 PhoQtek Labs · Design 6</p>
+</footer>
+<script src="js/site.js"></script>
+</body>
+</html>

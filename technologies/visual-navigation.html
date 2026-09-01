@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Visual Navigation System — PhoQtek Labs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/site.css">
+</head>
+<body>
+<header id="siteHeader">
+  <a class="brand" href="../index.html">
+    <span class="anton" style="font-size:20px;">PhoQtek</span>
+    <span class="mono" style="font-size:9.5px; letter-spacing:.26em; color:var(--meta);">LABS</span>
+  </a>
+  <nav>
+    <div class="fly hide-sm"><span>Technologies</span>
+      <div class="fly-menu"><div>
+        <a href="visual-navigation.html">Visual Navigation System</a>
+        <a href="fiber-optic-gyroscope.html">Fiber-Optic Gyroscope</a>
+      </div></div>
+    </div>
+    <div class="fly hide-sm"><span>Industries</span>
+      <div class="fly-menu wide"><div>
+        <a href="../industries/defense.html">Defense</a>
+        <a href="../industries/aerospace.html">Aerospace</a>
+        <a href="../industries/uav-ugv.html">UAV &amp; UGV</a>
+        <a href="../industries/robotics.html">Robotics</a>
+        <a href="../industries/autonomous-vehicles.html">Autonomous Vehicles</a>
+        <a href="../industries/industrial-underground.html">Industrial &amp; Underground</a>
+      </div></div>
+    </div>
+    <a href="../about.html">About</a>
+    <a href="../roadmap.html">R&amp;D Roadmap</a>
+    <a class="nav-cta" href="../contact.html">Discuss a requirement</a>
+  </nav>
+  <button class="menu-btn" type="button" aria-label="Open menu" aria-controls="mobileNav" aria-expanded="false"><span></span><span></span></button>
+</header>
+<div class="pin tall" data-pin data-cuts="0.35,0.68">
+  <div class="stage">
+    <div class="world" data-world style="transform-origin:46% 48%;">
+      <img src="../assets/hero-gorge.jpg" alt="GNSS-denied valley">
+      <div class="overlay">
+        <svg viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <g data-vns fill="none" stroke="#C9CDD4" stroke-width="1.6">
+            <g transform="translate(180 520)"><path d="M-8 0H8M0 -8V8"/></g>
+            <g transform="translate(300 360)"><path d="M-8 0H8M0 -8V8"/></g>
+            <g transform="translate(520 420)"><path d="M-8 0H8M0 -8V8"/></g>
+            <g transform="translate(700 390)"><path d="M-8 0H8M0 -8V8"/></g>
+            <g transform="translate(410 540)"><path d="M-8 0H8M0 -8V8"/></g>
+          </g>
+          <path data-fog d="M455 960 C 448 700, 438 500, 415 330" fill="none" stroke="#D7DBE1" stroke-width="1.8" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100"/>
+        </svg>
+      </div>
+    </div>
+    <div class="veil grain"></div>
+    <div class="hud">
+      <div class="hud-top"><div class="eyebrow"><i></i><span class="mono" style="font-size:10.5px; letter-spacing:.26em; text-transform:uppercase;">Visual Navigation System</span></div></div>
+      <div class="copy-stack">
+        <div class="copy-card is-on" data-copy="0"><h2 class="anton">The camera is<br>the navigator.</h2><p class="sub">Onboard visual sensing and embedded processing to provide navigation-relevant information in GNSS-degraded environments.</p></div>
+        <div class="copy-card" data-copy="1"><h2 class="anton">Visual lock.<br>Environment-dependent.</h2><p class="sub">Performance depends on lighting, visibility, terrain structure, environmental texture, weather, vibration, and sensor placement.</p></div>
+        <div class="copy-card" data-copy="2"><h2 class="anton metal-text">Platform-specific.</h2><p class="sub">The final configuration is validated against the intended operating environment. It complements inertial sensors and other onboard sources.</p></div>
+      </div>
+    </div>
+    <div class="scroll-cue"><span>Scroll to zoom</span><span class="bar"><i></i></span></div>
+    <div class="progress"><i data-bar></i></div>
+  </div>
+</div>
+<section class="block">
+  <span class="kicker">Technology</span>
+  <h2 class="anton display">Visual Navigation<br>for GPS-denied autonomy.</h2>
+  <p style="margin-top:22px; max-width:640px; color:var(--body); font-weight:300; line-height:1.75;">PhoQtek’s Visual Navigation System is being developed to support autonomous and mission-relevant platforms operating where GNSS/GPS is unavailable, degraded, obstructed, jammed, spoofed, or unreliable.</p>
+  <p style="margin-top:18px; max-width:640px; color:var(--body); font-weight:300; line-height:1.75;">It is intended to complement inertial sensors, platform control systems, mission computers, and other onboard navigation sources. Public pages do not disclose algorithm architecture or proprietary internals.</p>
+  <div style="margin-top:36px; display:flex; gap:12px; flex-wrap:wrap;">
+    <a class="btn-solid" href="../contact.html">Discuss a platform integration</a>
+    <a class="btn-line" href="fiber-optic-gyroscope.html">FOG roadmap</a>
+  </div>
+</section>
+<footer><p class="mono" style="font-size:11px; color:#4E545C;">© 2026 PhoQtek Labs</p></footer>
+<script src="../js/site.js"></script>
+</body>
+</html>
