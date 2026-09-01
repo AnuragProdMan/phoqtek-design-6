@@ -90,34 +90,38 @@
   const seqConstel = document.getElementById('seqConstel');
   const seqVisual = document.getElementById('seqVisual');
   const seqGnss = document.getElementById('seqGnss');
+  const seqRafale = document.getElementById('seqRafale');
   const hud = document.querySelector('#stage .hud');
   const actsWrap = document.querySelector('#stage .acts');
   const cue = document.querySelector('#stage .scroll-cue');
-  const seqs = { drone: null, constel: null, visual: null, gnss: null };
-  const eyes = ['01 · The convoy', '02 · Constellation', '03 · The platform', '04 · Visual lock'];
+  const seqs = { drone: null, constel: null, visual: null, gnss: null, rafale: null };
+  const eyes = ['01 · The convoy', '02 · Constellation', '03 · The platform', '04 · The jet', '05 · Visual lock'];
   const statuses = [
     'CONVOY <b>IN MOTION</b>',
     'GNSS <b class="warn">LOCK → DENIED</b>',
     'UAV <b>IN FLIGHT</b>',
+    'RAFALE <b>IN CLIMB</b>',
     'GROUND · VNS <b>TERRAIN LOCK</b>'
   ];
 
   function copyIndex(p) {
-    if (p < 0.09) return 0;
-    if (p < 0.18) return 1;
-    if (p < 0.27) return 2;
-    if (p < 0.36) return 3;
-    if (p < 0.45) return 4;
-    if (p < 0.54) return 5;
-    if (p < 0.63) return 6;
-    if (p < 0.72) return 7;
-    return 7;
+    if (p < 0.072) return 0;
+    if (p < 0.144) return 1;
+    if (p < 0.216) return 2;
+    if (p < 0.288) return 3;
+    if (p < 0.360) return 4;
+    if (p < 0.432) return 5;
+    if (p < 0.504) return 6;
+    if (p < 0.576) return 7;
+    if (p < 0.648) return 8;
+    return 9;
   }
   function chapterIndex(p) {
-    if (p < 0.18) return 0;
-    if (p < 0.36) return 1;
-    if (p < 0.54) return 2;
-    return 3;
+    if (p < 0.144) return 0;
+    if (p < 0.288) return 1;
+    if (p < 0.432) return 2;
+    if (p < 0.576) return 3;
+    return 4;
   }
   function localIn(p, a, b) {
     if (p <= a) return 0;
@@ -135,6 +139,7 @@
       if (seqConstel) seqs.constel = m.createSequence(seqConstel, { count: 36, path: (n) => `assets/constel/frame-${n}.jpg`, reduced: reduce });
       if (seqVisual) seqs.visual = m.createSequence(seqVisual, { count: 36, path: (n) => `assets/visual/frame-${n}.jpg`, reduced: reduce });
       if (seqGnss) seqs.gnss = m.createSequence(seqGnss, { count: 36, path: (n) => `assets/gnss/frame-${n}.jpg`, reduced: reduce });
+      if (seqRafale) seqs.rafale = m.createSequence(seqRafale, { count: 36, path: (n) => `assets/rafale/frame-${n}.jpg`, reduced: reduce });
     }).catch((err) => console.error('sequence', err));
   }
 
@@ -157,11 +162,13 @@
     if (seqGnss) seqGnss.classList.toggle('is-on', ch === 0);
     if (seqConstel) seqConstel.classList.toggle('is-on', ch === 1);
     if (seqDrone) seqDrone.classList.toggle('is-on', ch === 2);
-    if (seqVisual) seqVisual.classList.toggle('is-on', ch === 3);
-    if (seqs.gnss) seqs.gnss.setProgress(localIn(p, 0, 0.18));
-    if (seqs.constel) seqs.constel.setProgress(localIn(p, 0.18, 0.36));
-    if (seqs.drone) seqs.drone.setProgress(localIn(p, 0.36, 0.54));
-    if (seqs.visual) seqs.visual.setProgress(localIn(p, 0.54, 0.72));
+    if (seqRafale) seqRafale.classList.toggle('is-on', ch === 3);
+    if (seqVisual) seqVisual.classList.toggle('is-on', ch === 4);
+    if (seqs.gnss) seqs.gnss.setProgress(localIn(p, 0, 0.144));
+    if (seqs.constel) seqs.constel.setProgress(localIn(p, 0.144, 0.288));
+    if (seqs.drone) seqs.drone.setProgress(localIn(p, 0.288, 0.432));
+    if (seqs.rafale) seqs.rafale.setProgress(localIn(p, 0.432, 0.576));
+    if (seqs.visual) seqs.visual.setProgress(localIn(p, 0.576, 0.72));
   }
 
   function frame() {

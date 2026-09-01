@@ -81,7 +81,7 @@ nav a, nav span { font-family: "DM Mono", ui-monospace, monospace; font-size: 11
 body.menu-open { overflow: hidden; }
 
 .track { position: relative; background: #020308; }
-.runway { height: 640vh; pointer-events: none; }
+.runway { height: 800vh; pointer-events: none; }
 .over-copy { position: relative; z-index: 8; }
 .over-copy .ticker,
 .over-copy .proof,
@@ -198,7 +198,7 @@ footer { padding: 64px var(--gutter) 32px; }
 @media (max-width: 900px) {
   nav { display: none; }
   .menu-btn { display: inline-flex; }
-  .runway { height: 720vh; }
+  .runway { height: 880vh; }
   .pin, .pin.tall { height: 220vh; }
   .acts { display: none; }
   .grid-6, .grid-4, .grid-3, .foot-grid { grid-template-columns: 1fr 1fr; }
