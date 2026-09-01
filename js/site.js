@@ -173,15 +173,13 @@
 
   function frame() {
     if (header && !header.classList.contains('is-open')) {
-      const solid = track ? track.getBoundingClientRect().bottom < 88 : (window.scrollY || 0) > 24;
-      header.classList.toggle('is-solid', solid);
+      header.classList.toggle('is-solid', (window.scrollY || 0) > 24);
     }
     pins.forEach((p) => p.apply(p.progress()));
     if (track) applyTrack(progressOf(track));
     requestAnimationFrame(frame);
   }
 
-  if (header && !track) header.classList.add('is-solid');
   if (reduce && !track) {
     pins.forEach((p) => p.apply(0.25, true));
     return;
