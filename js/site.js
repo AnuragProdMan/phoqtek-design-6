@@ -88,26 +88,37 @@
 
   const filmVisual = document.getElementById('filmVisual');
   const filmGnss = document.getElementById('filmGnss');
-  const eyes = ['01 · Constellation', '02 · Visual lock', '03 · GNSS lock'];
+  const seqCanvas = document.getElementById('seqDrone');
+  let droneSeq = null;
+  const eyes = ['01 · Constellation', '02 · The platform', '03 · Visual lock', '04 · GNSS lock'];
   const statuses = [
     'GNSS <b class="warn">LOCK → DENIED</b>',
+    'UAV <b>IN FLIGHT</b>',
     'VNS <b>TERRAIN LOCK</b>',
     'GNSS <b class="warn">DENIED</b>'
   ];
 
   function copyIndex(p) {
-    if (p < 0.10) return 0;
-    if (p < 0.22) return 1;
-    if (p < 0.36) return 2;
-    if (p < 0.50) return 3;
-    if (p < 0.66) return 4;
-    if (p < 0.80) return 5;
-    return 6;
+    if (p < 0.08) return 0;
+    if (p < 0.16) return 1;
+    if (p < 0.24) return 2;
+    if (p < 0.36) return 3;
+    if (p < 0.48) return 4;
+    if (p < 0.60) return 5;
+    if (p < 0.72) return 6;
+    if (p < 0.86) return 7;
+    return 8;
   }
   function chapterIndex(p) {
-    if (p < 0.36) return 0;
-    if (p < 0.66) return 1;
-    return 2;
+    if (p < 0.24) return 0;
+    if (p < 0.48) return 1;
+    if (p < 0.72) return 2;
+    return 3;
+  }
+  function droneLocal(p) {
+    if (p < 0.24) return 0;
+    if (p > 0.48) return 1;
+    return (p - 0.24) / 0.24;
   }
 
   if (track && canvas) {
@@ -127,6 +138,15 @@
       });
     }
   }
+  if (track && seqCanvas) {
+    import('./sequence.js').then((m) => {
+      droneSeq = m.createSequence(seqCanvas, {
+        count: 36,
+        path: (n) => `assets/drone/frame-${n}.jpg`,
+        reduced: reduce
+      });
+    }).catch((err) => console.error('sequence', err));
+  }
 
   function applyTrack(p) {
     if (world) world.setProgress(p);
@@ -139,8 +159,10 @@
     if (eye) eye.textContent = eyes[ch];
     if (status) status.innerHTML = statuses[ch];
     if (canvas) canvas.classList.toggle('is-off', ch !== 0);
-    if (filmVisual) filmVisual.classList.toggle('is-on', ch === 1);
-    if (filmGnss) filmGnss.classList.toggle('is-on', ch === 2);
+    if (seqCanvas) seqCanvas.classList.toggle('is-on', ch === 1);
+    if (droneSeq) droneSeq.setProgress(droneLocal(p));
+    if (filmVisual) filmVisual.classList.toggle('is-on', ch === 2);
+    if (filmGnss) filmGnss.classList.toggle('is-on', ch === 3);
   }
 
   function frame() {

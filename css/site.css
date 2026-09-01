@@ -80,12 +80,12 @@ nav a, nav span { font-family: "DM Mono", ui-monospace, monospace; font-size: 11
 }
 body.menu-open { overflow: hidden; }
 
-.track { position: relative; height: 920vh; background: #020308; }
+.track { position: relative; height: 1100vh; background: #020308; }
 .stage-gl {
   position: sticky; top: 0; height: 100vh; overflow: hidden; background: #020308;
 }
-.stage-gl canvas { display: block; width: 100%; height: 100%; position: relative; z-index: 0; }
-.stage-gl canvas.is-off { opacity: 0; }
+.stage-gl > canvas#gl { display: block; width: 100%; height: 100%; position: relative; z-index: 0; }
+.stage-gl > canvas#gl.is-off { opacity: 0; }
 .stage-gl .veil {
   background: linear-gradient(to top, rgba(8,9,11,.58) 0%, rgba(8,9,11,.04) 38%, rgba(8,9,11,.22) 100%);
 }
@@ -93,7 +93,12 @@ body.menu-open { overflow: hidden; }
   position: absolute; inset: 0; z-index: 1; opacity: 0;
   transition: opacity .45s ease; pointer-events: none; overflow: hidden;
 }
-.act-film.is-on { opacity: 1; }
+.act-film.is-on, .act-seq.is-on { opacity: 1; }
+.act-seq {
+  position: absolute; inset: 0; z-index: 1; opacity: 0;
+  width: 100%; height: 100%; display: block;
+  transition: opacity .4s ease; pointer-events: none;
+}
 .act-film video {
   width: 100%; height: 100%; object-fit: cover; display: block;
   image-rendering: auto;
@@ -182,7 +187,7 @@ footer { padding: 64px var(--gutter) 32px; }
 @media (max-width: 900px) {
   nav { display: none; }
   .menu-btn { display: inline-flex; }
-  .track { height: 720vh; }
+  .track { height: 880vh; }
   .pin, .pin.tall { height: 220vh; }
   .acts { display: none; }
   .grid-6, .grid-4, .grid-3, .foot-grid { grid-template-columns: 1fr 1fr; }
@@ -197,6 +202,5 @@ footer { padding: 64px var(--gutter) 32px; }
 @media (max-width: 620px) { .grid-6, .grid-4, .grid-3, .foot-grid { grid-template-columns: 1fr; } }
 @media (prefers-reduced-motion: reduce) {
   .pin, .pin.tall { height: 100vh; }
-  .track { height: 100vh; }
   .scroll-cue .bar i { animation: none; }
 }

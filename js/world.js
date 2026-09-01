@@ -203,19 +203,20 @@ export async function createWorld(canvas, opts = {}) {
   }
 
   function chapterOf(p) {
-    if (p < 0.36) return 0;
-    if (p < 0.66) return 1;
-    return 2;
+    if (p < 0.24) return 0;
+    if (p < 0.48) return 1;
+    if (p < 0.72) return 2;
+    return 3;
   }
   function localOf(p) {
-    if (p < 0.36) return p / 0.36;
-    if (p < 0.66) return (p - 0.36) / 0.30;
-    return (p - 0.66) / 0.34;
+    if (p < 0.24) return p / 0.24;
+    if (p < 0.48) return (p - 0.24) / 0.24;
+    if (p < 0.72) return (p - 0.48) / 0.24;
+    return (p - 0.72) / 0.28;
   }
   function fadeOf(p) {
-    const d0 = Math.abs(p - 0.36);
-    const d1 = Math.abs(p - 0.66);
-    return 1 - smoothstep(0.0, 0.022, Math.min(d0, d1));
+    const d = Math.min(Math.abs(p - 0.24), Math.abs(p - 0.48), Math.abs(p - 0.72));
+    return 1 - smoothstep(0.0, 0.018, d);
   }
 
   function applySpace(t, dt) {
