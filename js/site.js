@@ -95,12 +95,12 @@
   const actsWrap = document.querySelector('#stage .acts');
   const cue = document.querySelector('#stage .scroll-cue');
   const seqs = { drone: null, constel: null, visual: null, gnss: null, rafale: null };
-  const eyes = ['01 · The convoy', '02 · Constellation', '03 · The platform', '04 · The jet', '05 · Visual lock'];
+  const eyes = ['01 · The jet', '02 · The convoy', '03 · Constellation', '04 · The platform', '05 · Visual lock'];
   const statuses = [
+    'RAFALE <b>NOSE DOWN</b>',
     'CONVOY <b>IN MOTION</b>',
     'GNSS <b class="warn">LOCK → DENIED</b>',
     'UAV <b>IN FLIGHT</b>',
-    'RAFALE <b>NOSE DOWN</b>',
     'GROUND · VNS <b>TERRAIN LOCK</b>'
   ];
 
@@ -159,15 +159,15 @@
     if (actsWrap) actsWrap.classList.toggle('is-away', overlay);
     if (cue) cue.classList.toggle('is-away', overlay);
     if (canvas) canvas.classList.add('is-off');
-    if (seqGnss) seqGnss.classList.toggle('is-on', ch === 0);
-    if (seqConstel) seqConstel.classList.toggle('is-on', ch === 1);
-    if (seqDrone) seqDrone.classList.toggle('is-on', ch === 2);
-    if (seqRafale) seqRafale.classList.toggle('is-on', ch === 3);
+    if (seqRafale) seqRafale.classList.toggle('is-on', ch === 0);
+    if (seqGnss) seqGnss.classList.toggle('is-on', ch === 1);
+    if (seqConstel) seqConstel.classList.toggle('is-on', ch === 2);
+    if (seqDrone) seqDrone.classList.toggle('is-on', ch === 3);
     if (seqVisual) seqVisual.classList.toggle('is-on', ch === 4);
-    if (seqs.gnss) seqs.gnss.setProgress(localIn(p, 0, 0.144));
-    if (seqs.constel) seqs.constel.setProgress(localIn(p, 0.144, 0.288));
-    if (seqs.drone) seqs.drone.setProgress(localIn(p, 0.288, 0.432));
-    if (seqs.rafale) seqs.rafale.setProgress(localIn(p, 0.432, 0.576));
+    if (seqs.rafale) seqs.rafale.setProgress(localIn(p, 0, 0.144));
+    if (seqs.gnss) seqs.gnss.setProgress(localIn(p, 0.144, 0.288));
+    if (seqs.constel) seqs.constel.setProgress(localIn(p, 0.288, 0.432));
+    if (seqs.drone) seqs.drone.setProgress(localIn(p, 0.432, 0.576));
     if (seqs.visual) seqs.visual.setProgress(localIn(p, 0.576, 0.72));
   }
 
