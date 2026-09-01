@@ -100,7 +100,7 @@
     'CONVOY <b>IN MOTION</b>',
     'GNSS <b class="warn">LOCK → DENIED</b>',
     'UAV <b>IN FLIGHT</b>',
-    'RAFALE <b>IN CLIMB</b>',
+    'RAFALE <b>ON APPROACH</b>',
     'GROUND · VNS <b>TERRAIN LOCK</b>'
   ];
 
