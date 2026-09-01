@@ -94,12 +94,12 @@
   const actsWrap = document.querySelector('#stage .acts');
   const cue = document.querySelector('#stage .scroll-cue');
   const seqs = { drone: null, constel: null, visual: null, gnss: null };
-  const eyes = ['01 · The platform', '02 · Constellation', '03 · Visual lock', '04 · GNSS lock'];
+  const eyes = ['01 · The convoy', '02 · Constellation', '03 · The platform', '04 · Visual lock'];
   const statuses = [
-    'UAV <b>IN FLIGHT</b>',
+    'CONVOY <b>IN MOTION</b>',
     'GNSS <b class="warn">LOCK → DENIED</b>',
-    'GROUND · VNS <b>TERRAIN LOCK</b>',
-    'CONVOY · GNSS <b class="warn">DENIED</b>'
+    'UAV <b>IN FLIGHT</b>',
+    'GROUND · VNS <b>TERRAIN LOCK</b>'
   ];
 
   function copyIndex(p) {
@@ -154,14 +154,14 @@
     if (actsWrap) actsWrap.classList.toggle('is-away', overlay);
     if (cue) cue.classList.toggle('is-away', overlay);
     if (canvas) canvas.classList.add('is-off');
-    if (seqDrone) seqDrone.classList.toggle('is-on', ch === 0);
+    if (seqGnss) seqGnss.classList.toggle('is-on', ch === 0);
     if (seqConstel) seqConstel.classList.toggle('is-on', ch === 1);
-    if (seqVisual) seqVisual.classList.toggle('is-on', ch === 2);
-    if (seqGnss) seqGnss.classList.toggle('is-on', ch === 3);
-    if (seqs.drone) seqs.drone.setProgress(localIn(p, 0, 0.18));
+    if (seqDrone) seqDrone.classList.toggle('is-on', ch === 2);
+    if (seqVisual) seqVisual.classList.toggle('is-on', ch === 3);
+    if (seqs.gnss) seqs.gnss.setProgress(localIn(p, 0, 0.18));
     if (seqs.constel) seqs.constel.setProgress(localIn(p, 0.18, 0.36));
-    if (seqs.visual) seqs.visual.setProgress(localIn(p, 0.36, 0.54));
-    if (seqs.gnss) seqs.gnss.setProgress(localIn(p, 0.54, 0.72));
+    if (seqs.drone) seqs.drone.setProgress(localIn(p, 0.36, 0.54));
+    if (seqs.visual) seqs.visual.setProgress(localIn(p, 0.54, 0.72));
   }
 
   function frame() {

@@ -52,10 +52,10 @@
 <div class="track" id="track">
   <div class="stage-gl" id="stage">
     <canvas id="gl" class="is-off" aria-hidden="true"></canvas>
-    <canvas id="seqDrone" class="act-seq is-on" aria-hidden="true"></canvas>
+    <canvas id="seqDrone" class="act-seq" aria-hidden="true"></canvas>
     <canvas id="seqConstel" class="act-seq" aria-hidden="true"></canvas>
     <canvas id="seqVisual" class="act-seq" aria-hidden="true"></canvas>
-    <canvas id="seqGnss" class="act-seq" aria-hidden="true"></canvas>
+    <canvas id="seqGnss" class="act-seq is-on" aria-hidden="true"></canvas>
     <div class="gl-fallback" id="glFallback" hidden>
       <video autoplay muted loop playsinline poster="assets/cinematic/constellation.jpg"><source src="assets/cinematic/constellation.mp4" type="video/mp4"></video>
     </div>
@@ -63,25 +63,25 @@
     <div class="veil grain"></div>
     <div class="hud">
       <div class="hud-top">
-        <div class="eyebrow"><i></i><span class="mono" id="hudEye" style="font-size:10.5px; letter-spacing:.26em; text-transform:uppercase; color:var(--silver);">01 · The platform</span></div>
-        <div class="status" id="hudStatus">UAV <b>IN FLIGHT</b></div>
+        <div class="eyebrow"><i></i><span class="mono" id="hudEye" style="font-size:10.5px; letter-spacing:.26em; text-transform:uppercase; color:var(--silver);">01 · The convoy</span></div>
+        <div class="status" id="hudStatus">CONVOY <b>IN MOTION</b></div>
       </div>
       <div class="copy-stack">
-        <div class="copy-card is-on" data-copy="0"><h2 class="anton">The platform<br>keeps flying.</h2><p class="lead">Redefining navigation beyond GPS.</p></div>
-        <div class="copy-card" data-copy="1"><h2 class="anton">Cameras on the<br>airframe.</h2><p class="sub">A UAV holds the canyon when GNSS cannot be treated as the sole trusted source.</p></div>
+        <div class="copy-card is-on" data-copy="0"><h2 class="anton">The platform<br>keeps moving.</h2><p class="lead">Redefining navigation beyond GPS.</p></div>
+        <div class="copy-card" data-copy="1"><h2 class="anton">The convoy<br>holds the pass.</h2><p class="sub">Ground vehicles keep moving when GNSS cannot be treated as the sole trusted source.</p></div>
         <div class="copy-card" data-copy="2"><h2 class="anton metal-text">Obstructed.<br>Spoofed.<br>Denied.</h2><p class="sub">The constellation is a machine assembling in orbit. It is the first thing to go.</p></div>
         <div class="copy-card" data-copy="3"><h2 class="anton">The sky has<br>gone silent.</h2><p class="sub">White buses lock into the plane. The platform cannot treat them as the sole trusted source.</p></div>
-        <div class="copy-card" data-copy="4"><h2 class="anton">The camera is<br>the navigator.</h2><p class="sub">Visual features lock the desert. Ground platforms hold the terrain.</p></div>
-        <div class="copy-card" data-copy="5"><h2 class="anton">Visual lock.<br>Terrain understood.</h2><p class="sub">Onboard sensing holds the dunes when the constellation cannot.</p></div>
-        <div class="copy-card" data-copy="6"><h2 class="anton">GPS dies<br>in the mountains.</h2><p class="sub">High terrain. Ice. The sky cannot be trusted.</p></div>
-        <div class="copy-card" data-copy="7"><h2 class="anton">The platform<br>keeps moving.</h2><p class="sub">The convoy holds the pass. Fusion keeps a path.</p></div>
+        <div class="copy-card" data-copy="4"><h2 class="anton">The platform<br>keeps flying.</h2><p class="sub">A UAV holds the canyon when GNSS cannot be treated as the sole trusted source.</p></div>
+        <div class="copy-card" data-copy="5"><h2 class="anton">Cameras on the<br>airframe.</h2><p class="sub">The camera is the navigator. Visual sensing holds a path in the air.</p></div>
+        <div class="copy-card" data-copy="6"><h2 class="anton">The camera is<br>the navigator.</h2><p class="sub">Visual features lock the desert. Ground platforms hold the terrain.</p></div>
+        <div class="copy-card" data-copy="7"><h2 class="anton">Visual lock.<br>Terrain understood.</h2><p class="sub">Onboard sensing holds the dunes when the constellation cannot.</p></div>
       </div>
     </div>
     <div class="acts">
-      <span data-a="0" class="on">The platform</span>
+      <span data-a="0" class="on">The convoy</span>
       <span data-a="1">Constellation</span>
-      <span data-a="2">Visual lock</span>
-      <span data-a="3">GNSS lock</span>
+      <span data-a="2">The platform</span>
+      <span data-a="3">Visual lock</span>
     </div>
     <div class="scroll-cue"><span>Scroll</span><span class="bar"><i></i></span></div>
     <div class="progress"><i data-bar></i></div>
