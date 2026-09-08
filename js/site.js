@@ -17,6 +17,8 @@
     panel.id = 'mobileNav';
     panel.className = 'mobile-nav';
     panel.innerHTML = nav.innerHTML;
+    const cta = header.querySelector('.nav-cta');
+    if (cta) panel.appendChild(cta.cloneNode(true));
     header.insertAdjacentElement('afterend', panel);
   }
   function setMenu(open) {
@@ -173,7 +175,7 @@
 
   function frame() {
     if (header && !header.classList.contains('is-open')) {
-      header.classList.toggle('is-solid', (window.scrollY || 0) > 24);
+      header.classList.toggle('is-solid', (window.scrollY || 0) > 24 && window.innerWidth > 900);
     }
     pins.forEach((p) => p.apply(p.progress()));
     if (track) applyTrack(progressOf(track));
