@@ -161,16 +161,22 @@
     if (actsWrap) actsWrap.classList.toggle('is-away', overlay);
     if (cue) cue.classList.toggle('is-away', overlay);
     if (canvas) canvas.classList.add('is-off');
-    if (seqRafale) seqRafale.classList.toggle('is-on', ch === 0);
-    if (seqGnss) seqGnss.classList.toggle('is-on', ch === 1);
-    if (seqConstel) seqConstel.classList.toggle('is-on', ch === 2);
-    if (seqDrone) seqDrone.classList.toggle('is-on', ch === 3);
-    if (seqVisual) seqVisual.classList.toggle('is-on', ch === 4);
-    if (seqs.rafale) seqs.rafale.setProgress(localIn(p, 0, 0.144));
-    if (seqs.gnss) seqs.gnss.setProgress(localIn(p, 0.144, 0.288));
-    if (seqs.constel) seqs.constel.setProgress(localIn(p, 0.288, 0.432));
-    if (seqs.drone) seqs.drone.setProgress(localIn(p, 0.432, 0.576));
-    if (seqs.visual) seqs.visual.setProgress(localIn(p, 0.576, 0.72));
+    const layers = [
+      [seqRafale, seqs.rafale, ch === 0, localIn(p, 0, 0.144)],
+      [seqGnss, seqs.gnss, ch === 1, localIn(p, 0.144, 0.288)],
+      [seqConstel, seqs.constel, ch === 2, localIn(p, 0.288, 0.432)],
+      [seqDrone, seqs.drone, ch === 3, localIn(p, 0.432, 0.576)],
+      [seqVisual, seqs.visual, ch === 4, localIn(p, 0.576, 0.72)]
+    ];
+    layers.forEach(([el, seq, on, local]) => {
+      if (!el) return;
+      const was = el.classList.contains('is-on');
+      el.classList.toggle('is-on', on);
+      if (seq) {
+        seq.setProgress(local);
+        if (on && !was) seq.invalidate();
+      }
+    });
   }
 
   function frame() {

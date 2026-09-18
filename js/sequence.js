@@ -2,15 +2,17 @@ export function createSequence(canvas, opts = {}) {
   const count = opts.count || 36;
   const path = opts.path || ((n) => `assets/drone/frame-${n}.jpg`);
   const reduced = !!opts.reduced;
-  const ctx = canvas.getContext('2d', { alpha: false });
+  const ctx = canvas.getContext('2d', { alpha: true });
   const images = [];
   let target = 0;
   let shown = 0;
   let lastDrawn = -1;
+  let dirty = true;
 
   for (let i = 1; i <= count; i++) {
     const img = new Image();
     img.decoding = 'async';
+    img.onload = () => { dirty = true; };
     img.src = path(String(i).padStart(3, '0'));
     images.push(img);
   }
@@ -23,15 +25,31 @@ export function createSequence(canvas, opts = {}) {
     if (canvas.width !== w || canvas.height !== h) {
       canvas.width = w;
       canvas.height = h;
-      lastDrawn = -1;
+      dirty = true;
     }
   }
 
+  function nearestReady(i) {
+    if (images[i] && images[i].complete && images[i].naturalWidth) return i;
+    for (let d = 1; d < count; d++) {
+      const lo = i - d;
+      const hi = i + d;
+      if (lo >= 0 && images[lo] && images[lo].complete && images[lo].naturalWidth) return lo;
+      if (hi < count && images[hi] && images[hi].complete && images[hi].naturalWidth) return hi;
+    }
+    return -1;
+  }
+
   function draw(i) {
-    const img = images[i];
-    if (!img || !img.complete || !img.naturalWidth) return;
+    const idx = nearestReady(i);
+    if (idx < 0) return;
+    const img = images[idx];
     size();
     const cw = canvas.width, ch = canvas.height;
+    if (cw < 2 || ch < 2) {
+      dirty = true;
+      return;
+    }
     const ir = img.naturalWidth / img.naturalHeight;
     const cr = cw / ch;
     let dw, dh, dx, dy;
@@ -40,10 +58,10 @@ export function createSequence(canvas, opts = {}) {
     } else {
       dw = cw; dh = cw / ir; dx = 0; dy = (ch - dh) / 2;
     }
-    ctx.fillStyle = '#020308';
-    ctx.fillRect(0, 0, cw, ch);
+    ctx.clearRect(0, 0, cw, ch);
     ctx.drawImage(img, dx, dy, dw, dh);
-    lastDrawn = i;
+    lastDrawn = idx;
+    dirty = false;
   }
 
   function setProgress(p) {
@@ -51,16 +69,30 @@ export function createSequence(canvas, opts = {}) {
     target = t * (count - 1);
   }
 
+  function invalidate() {
+    dirty = true;
+    lastDrawn = -1;
+    size();
+    draw(Math.round(shown));
+  }
+
   function tick() {
     shown += (target - shown) * (reduced ? 1 : 0.28);
     const i = Math.max(0, Math.min(count - 1, Math.round(shown)));
-    if (i !== lastDrawn) draw(i);
+    const on = canvas.classList.contains('is-on');
+    if (on && (dirty || i !== lastDrawn)) draw(i);
     requestAnimationFrame(tick);
   }
 
-  window.addEventListener('resize', () => { lastDrawn = -1; draw(Math.round(shown)); });
-  images[0].onload = () => draw(0);
-  requestAnimationFrame(tick);
+  window.addEventListener('resize', () => {
+    lastDrawn = -1;
+    dirty = true;
+    if (canvas.classList.contains('is-on')) draw(Math.round(shown));
+  });
+  canvas.addEventListener('transitionstart', () => {
+    if (canvas.classList.contains('is-on')) invalidate();
+  });
 
-  return { setProgress };
+  requestAnimationFrame(tick);
+  return { setProgress, invalidate };
 }
