@@ -4,7 +4,7 @@
   --amber: #E0A24A; --amber-line: #4A3A22; --gutter: clamp(20px, 4vw, 56px);
 }
 * { box-sizing: border-box; }
-html, body { margin: 0; background: var(--bg); color: var(--white); overflow-x: hidden; max-width: 100%; }
+html, body { margin: 0; background: var(--bg); color: var(--white); overflow-x: clip; max-width: 100%; }
 html { scroll-padding-top: 84px; }
 body { font-family: Barlow, "Helvetica Neue", Helvetica, sans-serif; -webkit-font-smoothing: antialiased; }
 a { color: var(--silver); text-decoration: none; }
