@@ -139,7 +139,7 @@ body.menu-open { overflow: hidden; }
 .acts.is-away,
 .scroll-cue.is-away { opacity: 0; pointer-events: none; transition: opacity .35s ease; }
 .stage-gl {
-  position: sticky; top: 0; height: 100vh; height: 100dvh; overflow: hidden; background: #020308; z-index: 0;
+  position: sticky; top: 0; height: 100vh; height: 100dvh; overflow: hidden; background: #020308; z-index: 1;
 }
 .stage-gl > canvas#gl { display: block; width: 100%; height: 100%; position: relative; z-index: 0; }
 .stage-gl > canvas#gl.is-off { opacity: 0; }
@@ -151,29 +151,14 @@ body.menu-open { overflow: hidden; }
   transition: opacity .45s ease; pointer-events: none; overflow: hidden;
 }
 .act-film.is-on { opacity: 1; }
-.act-seq {
-  position: absolute; inset: 0; z-index: 1; opacity: 0;
-  visibility: hidden;
+.seq-still,
+.seq-reel {
+  position: absolute; inset: 0; z-index: 1;
   width: 100%; height: 100%; display: block;
-  pointer-events: none;
-  transform: translateZ(0);
-  background-color: #020308;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  transition: opacity .4s ease, visibility 0s linear .4s;
+  pointer-events: none; background: #020308;
 }
-.act-seq.is-on {
-  opacity: 1;
-  visibility: visible;
-  z-index: 2;
-  transition: opacity .4s ease, visibility 0s;
-}
-#seqRafale { background-image: url('../assets/rafale/frame-001.jpg'); }
-#seqGnss { background-image: url('../assets/gnss/frame-001.jpg'); }
-#seqConstel { background-image: url('../assets/constel/frame-001.jpg'); }
-#seqDrone { background-image: url('../assets/drone/frame-001.jpg'); }
-#seqVisual { background-image: url('../assets/visual/frame-001.jpg'); }
+.seq-still { object-fit: cover; }
+.seq-reel { z-index: 2; }
 .act-film video {
   width: 100%; height: 100%; object-fit: cover; display: block;
   image-rendering: auto;

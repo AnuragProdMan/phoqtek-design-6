@@ -88,15 +88,19 @@
   const fallback = document.getElementById('glFallback');
   let world = null;
 
-  const seqDrone = document.getElementById('seqDrone');
-  const seqConstel = document.getElementById('seqConstel');
-  const seqVisual = document.getElementById('seqVisual');
-  const seqGnss = document.getElementById('seqGnss');
-  const seqRafale = document.getElementById('seqRafale');
+  const seqReel = document.getElementById('seqReel');
+  const seqStill = document.getElementById('seqStill');
   const hud = document.querySelector('#stage .hud');
   const actsWrap = document.querySelector('#stage .acts');
   const cue = document.querySelector('#stage .scroll-cue');
-  const seqs = { drone: null, constel: null, visual: null, gnss: null, rafale: null };
+  let reel = null;
+  const chapterRanges = [
+    [0, 0.144],
+    [0.144, 0.288],
+    [0.288, 0.432],
+    [0.432, 0.576],
+    [0.576, 0.72]
+  ];
   const eyes = ['01 · The jet', '02 · The convoy', '03 · Constellation', '04 · The platform', '05 · Visual lock'];
   const statuses = [
     'RAFALE <b>NOSE DOWN</b>',
@@ -135,13 +139,19 @@
     canvas.style.display = 'none';
     if (reduce && fallback) fallback.hidden = false;
   }
-  if (track) {
+  if (track && seqReel) {
     import('./sequence.js').then((m) => {
-      if (seqDrone) seqs.drone = m.createSequence(seqDrone, { count: 36, path: (n) => `assets/drone/frame-${n}.jpg`, reduced: reduce });
-      if (seqConstel) seqs.constel = m.createSequence(seqConstel, { count: 36, path: (n) => `assets/constel/frame-${n}.jpg`, reduced: reduce });
-      if (seqVisual) seqs.visual = m.createSequence(seqVisual, { count: 36, path: (n) => `assets/visual/frame-${n}.jpg`, reduced: reduce });
-      if (seqGnss) seqs.gnss = m.createSequence(seqGnss, { count: 36, path: (n) => `assets/gnss/frame-${n}.jpg`, reduced: reduce });
-      if (seqRafale) seqs.rafale = m.createSequence(seqRafale, { count: 36, path: (n) => `assets/rafale/frame-${n}.jpg`, reduced: reduce });
+      reel = m.createReel(seqReel, {
+        reduced: reduce,
+        still: seqStill,
+        chapters: [
+          { count: 36, path: (n) => `assets/rafale/frame-${n}.jpg` },
+          { count: 36, path: (n) => `assets/gnss/frame-${n}.jpg` },
+          { count: 36, path: (n) => `assets/constel/frame-${n}.jpg` },
+          { count: 36, path: (n) => `assets/drone/frame-${n}.jpg` },
+          { count: 36, path: (n) => `assets/visual/frame-${n}.jpg` }
+        ]
+      });
     }).catch((err) => console.error('sequence', err));
   }
 
@@ -161,22 +171,10 @@
     if (actsWrap) actsWrap.classList.toggle('is-away', overlay);
     if (cue) cue.classList.toggle('is-away', overlay);
     if (canvas) canvas.classList.add('is-off');
-    const layers = [
-      [seqRafale, seqs.rafale, ch === 0, localIn(p, 0, 0.144)],
-      [seqGnss, seqs.gnss, ch === 1, localIn(p, 0.144, 0.288)],
-      [seqConstel, seqs.constel, ch === 2, localIn(p, 0.288, 0.432)],
-      [seqDrone, seqs.drone, ch === 3, localIn(p, 0.432, 0.576)],
-      [seqVisual, seqs.visual, ch === 4, localIn(p, 0.576, 0.72)]
-    ];
-    layers.forEach(([el, seq, on, local]) => {
-      if (!el) return;
-      const was = el.classList.contains('is-on');
-      el.classList.toggle('is-on', on);
-      if (seq) {
-        seq.setProgress(local);
-        if (on && !was) seq.invalidate();
-      }
-    });
+    if (reel) {
+      const range = chapterRanges[ch] || chapterRanges[0];
+      reel.set(ch, localIn(p, range[0], range[1]));
+    }
   }
 
   function frame() {
